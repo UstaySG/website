@@ -51,4 +51,24 @@
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
+  @keyframes seesaw {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+  }
+
+  .animate-seesaw {
+    animation: seesaw 4s ease-in-out infinite;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    display: flex;
+    white-space: nowrap;
+    animation: marquee 40s linear infinite;
+  }
 }

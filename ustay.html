@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>UStay — Furnish Your Home Beautifully</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --blue:#1A3A6B;
+  --blue-mid:#2150A0;
+  --blue-light:#EEF3FB;
+  --yellow:#F5C400;
+  --yellow-l:#FFD740;
+  --white:#FFFFFF;
+  --off:#F4F6FA;
+  --ink:#0D1B35;
+  --muted:#6B7A99;
+  --grey:#E8EAF0;
+  --border:rgba(26,58,107,.1);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--white);color:var(--ink);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+.cursor{position:fixed;width:10px;height:10px;background:var(--yellow);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s;mix-blend-mode:multiply}
+.cursor-ring{position:fixed;width:32px;height:32px;border:1.5px solid var(--yellow);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:width .12s,height .12s}
+
+/* ══════════════════════════════
+   PUZZLE INTRO OVERLAY
+══════════════════════════════ */
+#intro{
+  position:fixed;inset:0;z-index:2000;background:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  pointer-events:none;
+}
+#intro.done{opacity:0;pointer-events:none;transition:opacity .6s .2s}
+
+.puzzle-stage{position:relative;width:min(800px,90vw);height:min(340px,50vh);display:flex;align-items:center;justify-content:center}
+
+/* Each puzzle piece is a word/phrase that flies in */
+.pz{
+  position:absolute;
+  font-family:'Playfair Display',serif;
+  font-weight:400;
+  color:var(--white);
+  opacity:0;
+  will-change:transform,opacity;
+}
+.pz.yellow{color:var(--yellow)}
+.pz.sub{font-family:'Outfit',sans-serif;font-weight:300;font-size:clamp(.8rem,1.5vw,1rem);color:rgba(255,255,255,.55);letter-spacing:.04em}
+.pz.tag{font-family:'Outfit',sans-serif;font-weight:400;font-size:clamp(.6rem,1.2vw,.75rem);letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4)}
+.pz.stat-p{font-family:'Playfair Display',serif;color:var(--yellow-l);font-size:clamp(1.2rem,2.5vw,2rem)}
+.pz.stat-l-p{font-family:'Outfit',sans-serif;font-size:clamp(.55rem,.9vw,.68rem);letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+.pz.bar{width:60px;height:3px;background:var(--yellow);border-radius:1px}
+
+/* NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:1.2rem 4rem;
+  background:rgba(255,255,255,.93);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--border);
+  opacity:0;transform:translateY(-10px);
+  transition:opacity .5s,transform .5s;
+}
+nav.visible{opacity:1;transform:translateY(0)}
+.logo{font-family:'Playfair Display',serif;font-size:1.55rem;letter-spacing:.04em;color:var(--blue)}
+.logo b{color:var(--yellow);font-weight:500}
+.nav-r{display:flex;align-items:center;gap:2.2rem}
+.nav-link{font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-link:hover{color:var(--blue)}
+.nav-btn{background:var(--blue);color:var(--white);border:none;padding:.62rem 1.5rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-family:'Outfit',sans-serif;cursor:none;transition:background .25s;border-radius:2px}
+.nav-btn:hover{background:var(--yellow);color:var(--ink)}
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.hero{
+  min-height:100vh;background:var(--blue);
+  position:relative;overflow:hidden;
+  display:flex;flex-direction:column;
+  justify-content:center;align-items:center;
+  text-align:center;padding:7rem 2rem 5rem;
+  opacity:0;transition:opacity .5s;
+}
+.hero.visible{opacity:1}
+.hero-geo{position:absolute;inset:0;pointer-events:none}
+.geo-ring{position:absolute;border-radius:50%;border:1px solid rgba(255,255,255,.06);animation:geoFloat 14s ease-in-out infinite alternate}
+.gr1{width:700px;height:700px;top:-200px;right:-200px}
+.gr2{width:400px;height:400px;bottom:-100px;left:-100px;animation-delay:5s}
+.geo-dots{position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.06) 1px,transparent 1px);background-size:40px 40px}
+@keyframes geoFloat{from{transform:translate(0,0)}to{transform:translate(20px,14px)}}
+
+.hero-eyebrow{font-size:.68rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:1.5rem}
+.hero-line1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,4vw,4rem);font-weight:400;color:var(--white);margin-bottom:.5rem;line-height:1.05}
+
+/* ══════════════════════════════
+   BIG BALANCE SCALE
+══════════════════════════════ */
+.scale-wrap{
+  position:relative;width:min(860px,92vw);
+  margin:0 auto 1.5rem;
+  display:flex;flex-direction:column;
+  align-items:center;
+}
+
+/* The pivot + post */
+.scale-post{width:4px;height:clamp(50px,7vw,80px);background:rgba(255,255,255,.2);margin:0 auto;position:relative;z-index:2}
+.scale-post::after{content:'';position:absolute;bottom:-6px;left:50%;transform:translateX(-50%);width:16px;height:16px;background:var(--yellow);border-radius:50%}
+
+/* Beam container — rocks */
+.beam-wrap{
+  width:100%;display:flex;align-items:flex-start;position:relative;
+  animation:beamRock 4s ease-in-out infinite;
+  transform-origin:center bottom;
+}
+@keyframes beamRock{
+  0%,100%{transform:rotate(0deg)}
+  20%{transform:rotate(-4deg)}
+  70%{transform:rotate(4deg)}
+}
+
+/* Horizontal beam */
+.beam{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:100%;height:3px;
+  background:linear-gradient(to right,rgba(255,255,255,.1),rgba(255,255,255,.35),rgba(255,255,255,.35),rgba(255,255,255,.1));
+}
+.beam::before,.beam::after{
+  content:'';position:absolute;top:50%;transform:translateY(-50%);
+  width:10px;height:10px;background:var(--yellow);border-radius:50%;
+}
+.beam::before{left:0}
+.beam::after{right:0}
+
+/* Pans hang from beam ends */
+.pan-side{display:flex;flex-direction:column;align-items:center;flex:1;padding-top:0}
+.pan-chain{
+  width:1px;
+  height:clamp(55px,8vw,90px);
+  background:linear-gradient(to bottom,rgba(255,255,255,.3),rgba(255,255,255,.15));
+}
+.pan{
+  background:rgba(255,255,255,.06);
+  border:1.5px solid rgba(255,255,255,.18);
+  border-top:none;
+  border-radius:0 0 80px 80px;
+  width:clamp(160px,22vw,240px);
+  padding:clamp(1.2rem,2.5vw,2rem) 1rem clamp(1rem,2vw,1.5rem);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+/* Subtle pan shine */
+.pan::before{
+  content:'';position:absolute;top:0;left:10%;right:10%;height:1px;
+  background:linear-gradient(to right,transparent,rgba(255,255,255,.2),transparent);
+}
+.pan-word{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.6rem,3.5vw,3.2rem);
+  font-weight:400;line-height:1;
+  text-align:center;
+}
+.pan-word.left{color:var(--yellow)}
+.pan-word.right{color:var(--white)}
+
+/* AND connector below post */
+.scale-and{
+  font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.3);margin-top:.5rem;
+}
+
+.hero-sub{font-size:1rem;color:rgba(255,255,255,.55);font-weight:300;line-height:1.8;max-width:480px;margin:2rem auto 2.8rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.bp{background:var(--yellow);color:var(--ink);border:none;padding:1.1rem 2.6rem;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-family:'Outfit',sans-serif;cursor:none;transition:all .25s;text-decoration:none;display:inline-block;font-weight:600;border-radius:2px}
+.bp:hover{background:var(--white);transform:translateY(-2px)}
+.bo{background:transparent;color:rgba(255,255,255,.65);border:1.5px solid rgba(255,255,255,.22);padding:1.1rem 2.6rem;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;font-family:'Outfit',sans-serif;cursor:none;transition:all .25s;text-decoration:none;display:inline-block;border-radius:2px}
+.bo:hover{border-color:var(--yellow);color:var(--yellow)}
+
+.hero-stats{display:flex;gap:0;margin-top:4rem;border-top:1px solid rgba(255,255,255,.1);padding-top:2.8rem;width:100%;max-width:620px;justify-content:center}
+.hs{flex:1;text-align:center;border-right:1px solid rgba(255,255,255,.08);padding:0 1.5rem}
+.hs:last-child{border-right:none}
+.hs-n{font-family:'Playfair Display',serif;font-size:2rem;color:var(--yellow);line-height:1}
+.hs-l{font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.3rem}
+
+.scroll-down{display:flex;flex-direction:column;align-items:center;gap:.5rem;margin-top:3.5rem}
+.sd-line{width:1px;height:44px;background:linear-gradient(to bottom,var(--yellow),transparent);animation:sdP 2s ease-in-out infinite}
+.sd-text{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.3)}
+@keyframes sdP{0%,100%{opacity:.35}50%{opacity:1}}
+
+/* MARQUEE */
+.marquee{background:var(--yellow);padding:.85rem 0;overflow:hidden;white-space:nowrap}
+.mi{display:inline-block;animation:scrollM 22s linear infinite;font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink);font-weight:600}
+.mi span{margin:0 2rem}
+.mi .dot{color:rgba(13,27,53,.3)}
+@keyframes scrollM{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* SHARED */
+.sec-label{font-size:.65rem;letter-spacing:.22em;text-transform:uppercase;color:var(--yellow);margin-bottom:.8rem}
+.sec-h{font-family:'Playfair Display',serif;font-size:clamp(2rem,3.5vw,3rem);font-weight:400;color:var(--blue);line-height:1.1}
+.sec-h i{font-style:italic;color:var(--blue)}
+.sec-top{text-align:center;margin-bottom:4rem}
+
+/* WHY US */
+.why{padding:7rem 5vw;background:var(--white)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;margin-top:4rem}
+.wc{padding:3rem 2.5rem;background:var(--off);border-left:3px solid var(--yellow);transition:all .3s;text-decoration:none;display:block;position:relative;overflow:hidden}
+.wc::after{content:'→';position:absolute;bottom:2rem;right:2rem;font-size:1.1rem;color:var(--yellow);opacity:.4;transition:all .3s}
+.wc:hover{background:var(--blue);transform:translateY(-3px);box-shadow:0 12px 40px rgba(26,58,107,.15)}
+.wc:hover::after{opacity:1;color:var(--yellow);transform:translate(3px,-3px)}
+.wc:hover .wc-n,.wc:hover .wc-title,.wc:hover .wc-text{color:var(--white)}
+.wc:hover .wc-n{color:var(--yellow)}
+.wc-n{font-family:'Playfair Display',serif;font-size:3rem;color:rgba(26,58,107,.12);line-height:1;margin-bottom:1.2rem;transition:color .3s}
+.wc-title{font-size:1.05rem;font-weight:600;color:var(--blue);margin-bottom:.7rem;transition:color .3s}
+.wc-text{font-size:.86rem;color:var(--muted);line-height:1.7;transition:color .3s}
+
+/* PATHS */
+.paths-section{padding:7rem 5vw;background:var(--off)}
+.paths-grid{display:grid;grid-template-columns:1fr 1fr;gap:3px;max-width:920px;margin:0 auto}
+.path{padding:3.5rem 3rem;cursor:none;position:relative;overflow:hidden;background:var(--grey)}
+.path::after{content:'';position:absolute;inset:0;z-index:0;transform:translateY(101%);transition:transform .45s cubic-bezier(.16,1,.3,1)}
+.path-a::after{background:var(--blue)}
+.path-b::after{background:var(--yellow)}
+.path:hover::after{transform:translateY(0)}
+.pi{position:relative;z-index:1}
+.ptag{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:#9AA0B4;margin-bottom:1.2rem;transition:color .3s}
+.ptitle{font-family:'Playfair Display',serif;font-size:2rem;color:#7A8099;margin-bottom:1.4rem;line-height:1.15;transition:color .3s}
+.plist{list-style:none;display:flex;flex-direction:column;gap:.6rem}
+.plist li{font-size:.86rem;color:#9AA0B4;display:flex;gap:.65rem;line-height:1.5;transition:color .3s}
+.plist li::before{content:'→';flex-shrink:0;color:#BCC0CC;transition:color .3s}
+.pcta{display:inline-block;margin-top:2rem;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:#9AA0B4;border-bottom:1px solid currentColor;padding-bottom:.15rem;transition:color .3s;cursor:none}
+.pprice{display:inline-block;margin-top:.8rem;font-size:.76rem;padding:.3rem .8rem;background:rgba(154,160,180,.12);color:#9AA0B4;transition:all .3s;border-radius:2px}
+.path-a:hover .ptag{color:rgba(255,255,255,.5)}
+.path-a:hover .ptitle,.path-a:hover .pcta{color:var(--white)}
+.path-a:hover .plist li{color:rgba(255,255,255,.72)}
+.path-a:hover .plist li::before{color:rgba(255,255,255,.35)}
+.path-b:hover .ptag{color:rgba(13,27,53,.45)}
+.path-b:hover .ptitle,.path-b:hover .pcta{color:var(--ink)}
+.path-b:hover .plist li{color:rgba(13,27,53,.68)}
+.path-b:hover .plist li::before{color:rgba(13,27,53,.3)}
+.path-b:hover .pprice{background:rgba(13,27,53,.1);color:var(--ink)}
+
+/* GALLERY */
+.gallery{padding:7rem 5vw;background:var(--white)}
+.style-tabs{display:flex;justify-content:center;gap:.4rem;margin-top:1.8rem;margin-bottom:3rem;flex-wrap:wrap}
+.stab{background:none;border:1.5px solid var(--yellow);color:var(--muted);padding:.5rem 1.3rem;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;font-family:'Outfit',sans-serif;cursor:none;transition:all .2s;border-radius:2px}
+.stab.active,.stab:hover{background:var(--yellow);border-color:var(--yellow);color:var(--ink);font-weight:600}
+.gallery-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.gcard{position:relative;overflow:hidden;cursor:none;aspect-ratio:4/5}
+.gcard-bg{width:100%;height:100%;transition:transform .55s cubic-bezier(.16,1,.3,1)}
+.gcard:hover .gcard-bg{transform:scale(1.06)}
+.gcard-ov{position:absolute;inset:0;background:linear-gradient(to top,rgba(13,27,53,.93) 0%,transparent 50%);opacity:0;transition:opacity .35s}
+.gcard:hover .gcard-ov{opacity:1}
+.gcard-info{position:absolute;bottom:0;left:0;right:0;padding:1.8rem 1.6rem;transform:translateY(10px);opacity:0;transition:all .35s}
+.gcard:hover .gcard-info{transform:translateY(0);opacity:1}
+.gcard-style{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--yellow);margin-bottom:.4rem}
+.gcard-name{font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--white);margin-bottom:.3rem}
+.gcard-loc{font-size:.72rem;color:rgba(255,255,255,.4)}
+.d-scandi{background:linear-gradient(145deg,#E4E0D8,#CCC8C0)}
+.d-japandi{background:linear-gradient(145deg,#C4BCAC,#B0A898)}
+.d-modern{background:linear-gradient(145deg,#1A2E58,#0E1E3A)}
+.d-minimal{background:linear-gradient(145deg,#EDEAE4,#DEDAD4)}
+.d-indust{background:linear-gradient(145deg,#2E2A24,#1E1A14)}
+.d-luxury{background:linear-gradient(145deg,#B89858,#A08040)}
+
+.gallery-note{margin-top:3rem;background:var(--blue);padding:2.5rem 3rem;display:flex;justify-content:space-between;align-items:center;gap:2rem;flex-wrap:wrap}
+.gn-left .gn-title{font-family:'Playfair Display',serif;font-size:1.4rem;color:var(--white);margin-bottom:.4rem}
+.gn-left .gn-text{font-size:.88rem;color:rgba(255,255,255,.55);line-height:1.65;max-width:500px}
+.gn-right{display:flex;flex-direction:column;align-items:flex-end;gap:.4rem;flex-shrink:0}
+.gn-price{font-family:'Playfair Display',serif;font-size:2.2rem;color:var(--yellow);line-height:1}
+.gn-waive{font-size:.7rem;color:rgba(255,255,255,.4);letter-spacing:.05em}
+.gn-btn{margin-top:.5rem;background:var(--yellow);color:var(--ink);border:none;padding:.75rem 1.6rem;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;font-family:'Outfit',sans-serif;cursor:none;border-radius:2px;text-decoration:none;display:inline-block;font-weight:600;transition:background .2s}
+.gn-btn:hover{background:var(--yellow-l)}
+
+/* T&C */
+.tnc{padding:6rem 5vw;background:var(--off)}
+.tnc-inner{max-width:900px;margin:0 auto}
+.tnc-grid{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:3.5rem}
+.tnc-card{background:var(--white);border-top:3px solid var(--yellow);padding:2rem 2rem 1.8rem}
+.tnc-card-title{font-size:.75rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;padding-bottom:.8rem;border-bottom:1px solid var(--border)}
+.tnc-card ul{list-style:none;display:flex;flex-direction:column;gap:.55rem}
+.tnc-card ul li{font-size:.83rem;color:var(--muted);line-height:1.6;display:flex;gap:.6rem}
+.tnc-card ul li::before{content:'·';color:var(--yellow);flex-shrink:0;font-size:1.1rem;line-height:1.3;font-weight:700}
+.tnc-full{margin-top:2px;background:var(--white);padding:2rem 2rem;border-top:1px solid var(--border)}
+.tnc-full p{font-size:.82rem;color:var(--muted);line-height:1.8}
+.tnc-full p+p{margin-top:.8rem}
+
+/* FOOTER */
+footer{background:var(--ink);padding:2.5rem 4rem;display:flex;justify-content:space-between;align-items:center}
+.flogo{font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--white)}
+.flogo b{color:var(--yellow);font-weight:500}
+.fcopy{font-size:.68rem;color:rgba(255,255,255,.2)}
+.ftg{font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;color:var(--yellow);text-decoration:none;cursor:none;transition:opacity .2s}
+.ftg:hover{opacity:.7}
+
+.float-btn{position:fixed;bottom:2rem;right:2rem;z-index:400;background:var(--yellow);color:var(--ink);padding:.9rem 1.8rem;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;font-family:'Outfit',sans-serif;font-weight:600;cursor:none;text-decoration:none;box-shadow:0 8px 32px rgba(245,196,0,.35);transition:all .25s;animation:floatIn .8s 0s both;border-radius:2px}
+.float-btn:hover{background:var(--blue);color:var(--white);transform:translateY(-2px)}
+@keyframes floatIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+
+/* UTILS */
+.rv{opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.rv.in{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+  nav{padding:1.2rem 1.5rem}
+  .nav-r .nav-link{display:none}
+  .paths-grid,.tnc-grid{grid-template-columns:1fr}
+  .gallery-grid{grid-template-columns:1fr 1fr}
+  .why-grid{grid-template-columns:1fr}
+  .gallery-note{flex-direction:column;align-items:flex-start}
+  .gn-right{align-items:flex-start}
+  footer{flex-direction:column;gap:1rem;text-align:center;padding:2rem 1.5rem}
+  .pan{width:clamp(110px,35vw,180px)}
+}
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cur"></div>
+<div class="cursor-ring" id="ring"></div>
+
+<!-- ═══ PUZZLE INTRO OVERLAY ═══ -->
+<div id="intro">
+  <div class="puzzle-stage" id="stage"></div>
+</div>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="logo">U<b>Stay</b></div>
+  <div class="nav-r">
+    <a href="#why" class="nav-link">Why Us</a>
+    <a href="#gallery" class="nav-link">Our Work</a>
+    <a href="#tnc" class="nav-link">T&amp;C</a>
+    <button class="nav-btn" onclick="document.getElementById('paths').scrollIntoView({behavior:'smooth'})">Get a Quote</button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="mainHero">
+  <div class="hero-geo">
+    <div class="geo-dots"></div>
+    <div class="geo-ring gr1"></div>
+    <div class="geo-ring gr2"></div>
+  </div>
+
+  <div class="hero-eyebrow">Singapore's Furniture Concierge · Condo &amp; BTO Specialists</div>
+  <div class="hero-line1">Furnish your home</div>
+
+  <!-- BIG BALANCE SCALE -->
+  <div class="scale-wrap">
+    <div class="beam-wrap">
+      <div class="beam"></div>
+      <!-- LEFT PAN -->
+      <div class="pan-side">
+        <div class="pan-chain"></div>
+        <div class="pan">
+          <span class="pan-word left">beautifully</span>
+        </div>
+      </div>
+      <!-- RIGHT PAN -->
+      <div class="pan-side">
+        <div class="pan-chain"></div>
+        <div class="pan">
+          <span class="pan-word right">cost&#8209;effectively.</span>
+        </div>
+      </div>
+    </div>
+    <div class="scale-post"></div>
+    <div class="scale-and">equally important</div>
+  </div>
+
+  <p class="hero-sub">Factory-direct furniture from trusted manufacturers — with full design guidance, ordering, and delivery handled for you.</p>
+  <div class="hero-btns">
+    <a href="#paths" class="bp">Start Your Journey</a>
+    <a href="#gallery" class="bo">See Our Work</a>
+  </div>
+  <div class="hero-stats">
+    <div class="hs"><div class="hs-n">↓50%</div><div class="hs-l">vs Local Showroom</div></div>
+    <div class="hs"><div class="hs-n">100%</div><div class="hs-l">Managed for You</div></div>
+    <div class="hs"><div class="hs-n">0</div><div class="hs-l">Overseas Hassle</div></div>
+  </div>
+  <div class="scroll-down">
+    <div class="sd-line"></div>
+    <div class="sd-text">Scroll</div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="mi">
+    <span>Sofa</span><span class="dot">✦</span><span>Bed Frame</span><span class="dot">✦</span><span>Dining Set</span><span class="dot">✦</span><span>TV Console</span><span class="dot">✦</span><span>Lighting</span><span class="dot">✦</span><span>Rugs</span><span class="dot">✦</span><span>Storage</span><span class="dot">✦</span><span>Custom Orders</span><span class="dot">✦</span><span>Made to Order</span><span class="dot">✦</span><span>Factory Direct</span><span class="dot">✦</span>
+    <span>Sofa</span><span class="dot">✦</span><span>Bed Frame</span><span class="dot">✦</span><span>Dining Set</span><span class="dot">✦</span><span>TV Console</span><span class="dot">✦</span><span>Lighting</span><span class="dot">✦</span><span>Rugs</span><span class="dot">✦</span><span>Storage</span><span class="dot">✦</span><span>Custom Orders</span><span class="dot">✦</span><span>Made to Order</span><span class="dot">✦</span><span>Factory Direct</span><span class="dot">✦</span>
+  </div>
+</div>
+
+<!-- WHY US -->
+<section class="why" id="why">
+  <div class="sec-top rv">
+    <div class="sec-label">Why UStay</div>
+    <h2 class="sec-h">The smarter way to <i>furnish</i></h2>
+  </div>
+  <div class="why-grid rv">
+    <a class="wc" href="#gallery">
+      <div class="wc-n">01</div>
+      <div class="wc-title">Factory-Direct Pricing</div>
+      <p class="wc-text">We cut out the middlemen. Premium quality at prices local showrooms can't match. See our past projects.</p>
+    </a>
+    <a class="wc" href="#paths">
+      <div class="wc-n">02</div>
+      <div class="wc-title">Curated Quality</div>
+      <p class="wc-text">Every piece sourced from manufacturers we personally trust. No guesswork, no quality lottery. Start a quote.</p>
+    </a>
+    <a class="wc" href="https://t.me/ustaysg">
+      <div class="wc-n">03</div>
+      <div class="wc-title">Singapore-Side Support</div>
+      <p class="wc-text">We manage shipping, customs, delivery, and installation end to end. Chat with us on Telegram.</p>
+    </a>
+  </div>
+</section>
+
+<!-- PATHS -->
+<section class="paths-section" id="paths">
+  <div class="sec-top rv">
+    <div class="sec-label">How We Work</div>
+    <h2 class="sec-h">Pick your <i>path</i></h2>
+  </div>
+  <div class="paths-grid rv">
+    <div class="path path-a">
+      <div class="pi">
+        <div class="ptag">Path One</div>
+        <div class="ptitle">I know<br/>what I want</div>
+        <ul class="plist">
+          <li>Send photos or floor plan</li>
+          <li>We source &amp; quote</li>
+          <li>Approve — we deliver</li>
+        </ul>
+        <div class="pcta">Start a Quote →</div>
+      </div>
+    </div>
+    <div class="path path-b">
+      <div class="pi">
+        <div class="ptag">Path Two</div>
+        <div class="ptitle">I need a<br/>design first</div>
+        <ul class="plist">
+          <li>Get a full soft-furnishing plan</li>
+          <li>Style direction + item list</li>
+          <li>Buy through us — fee offset</li>
+        </ul>
+        <div class="pcta">Explore Design →</div>
+        <div class="pprice">From S$300</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="gallery" id="gallery">
+  <div class="sec-top rv">
+    <div class="sec-label">Our Work</div>
+    <h2 class="sec-h">Past designs we've <i>created</i></h2>
+  </div>
+  <div class="style-tabs rv" id="tabRow">
+    <button class="stab active" data-filter="all">All Styles</button>
+    <button class="stab" data-filter="scandi">Scandinavian</button>
+    <button class="stab" data-filter="japandi">Japandi</button>
+    <button class="stab" data-filter="modern">Modern</button>
+    <button class="stab" data-filter="minimal">Minimalist</button>
+    <button class="stab" data-filter="industrial">Industrial</button>
+    <button class="stab" data-filter="luxury">Light Luxury</button>
+  </div>
+  <div class="gallery-grid rv" id="galleryGrid">
+    <div class="gcard" data-style="scandi">
+      <div class="gcard-bg d-scandi">
+        <svg width="100%" height="100%" viewBox="0 0 340 430" xmlns="http://www.w3.org/2000/svg"><rect width="340" height="430" fill="#E4E0D8"/><rect x="30" y="250" width="280" height="100" rx="3" fill="rgba(160,150,135,.35)"/><rect x="45" y="235" width="250" height="85" rx="4" fill="rgba(140,132,118,.3)"/><rect x="60" y="248" width="90" height="66" rx="3" fill="rgba(120,112,98,.3)"/><rect x="165" y="248" width="120" height="66" rx="3" fill="rgba(120,112,98,.25)"/><rect x="30" y="352" width="280" height="7" rx="1" fill="rgba(120,112,98,.2)"/><circle cx="170" cy="135" r="52" fill="rgba(180,172,158,.28)"/><rect x="167" y="80" width="4" height="60" fill="rgba(130,122,108,.38)"/><ellipse cx="169" cy="80" rx="22" ry="9" fill="rgba(150,140,125,.45)"/></svg>
+      </div>
+      <div class="gcard-ov"></div>
+      <div class="gcard-info"><div class="gcard-style">Scandinavian</div><div class="gcard-name">Bright Living Room</div><div class="gcard-loc">3-room BTO, Sengkang</div></div>
+    </div>
+    <div class="gcard" data-style="japandi">
+      <div class="gcard-bg d-japandi">
+        <svg width="100%" height="100%" viewBox="0 0 340 430" xmlns="http://www.w3.org/2000/svg"><rect width="340" height="430" fill="#C4BCAC"/><rect x="25" y="200" width="290" height="170" rx="1" fill="rgba(255,255,255,.12)"/><rect x="25" y="198" width="290" height="26" rx="1" fill="rgba(255,255,255,.2)"/><rect x="50" y="172" width="240" height="30" rx="1" fill="rgba(255,255,255,.14)"/><ellipse cx="90" cy="156" rx="30" ry="22" fill="rgba(255,255,255,.13)"/><ellipse cx="250" cy="156" rx="30" ry="22" fill="rgba(255,255,255,.13)"/></svg>
+      </div>
+      <div class="gcard-ov"></div>
+      <div class="gcard-info"><div class="gcard-style">Japandi</div><div class="gcard-name">Zen Master Bedroom</div><div class="gcard-loc">4-room BTO, Tampines</div></div>
+    </div>
+    <div class="gcard" data-style="modern">
+      <div class="gcard-bg d-modern">
+        <svg width="100%" height="100%" viewBox="0 0 340 430" xmlns="http://www.w3.org/2000/svg"><rect width="340" height="430" fill="#1A2E58"/><rect x="30" y="240" width="280" height="120" rx="2" fill="rgba(255,255,255,.06)"/><rect x="40" y="225" width="260" height="85" rx="3" fill="rgba(255,255,255,.08)"/><rect x="55" y="238" width="95" height="66" rx="2" fill="rgba(245,196,0,.14)"/><rect x="165" y="238" width="125" height="66" rx="2" fill="rgba(245,196,0,.09)"/><rect x="167" y="74" width="4" height="58" fill="rgba(255,255,255,.18)"/><ellipse cx="169" cy="74" rx="22" ry="9" fill="rgba(245,196,0,.28)"/></svg>
+      </div>
+      <div class="gcard-ov"></div>
+      <div class="gcard-info"><div class="gcard-style">Modern</div><div class="gcard-name">Contemporary Living</div><div class="gcard-loc">2-bed Condo, Buona Vista</div></div>
+    </div>
+    <div class="gcard" data-style="minimal">
+      <div class="gcard-bg d-minimal">
+        <svg width="100%" height="100%" viewBox="0 0 340 430" xmlns="http://www.w3.org/2000/svg"><rect width="340" height="430" fill="#EDEAE4"/><ellipse cx="170" cy="265" rx="125" ry="13" fill="rgba(150,142,132,.14)"/><rect x="45" y="215" width="250" height="60" rx="2" fill="rgba(150,142,132,.2)"/><rect x="65" y="198" width="68" height="20" rx="1" fill="rgba(150,142,132,.17)"/><rect x="140" y="198" width="68" height="20" rx="1" fill="rgba(150,142,132,.17)"/><rect x="215" y="198" width="62" height="20" rx="1" fill="rgba(150,142,132,.13)"/><circle cx="80" cy="145" r="22" fill="rgba(150,142,132,.18)"/><circle cx="170" cy="145" r="22" fill="rgba(150,142,132,.18)"/><circle cx="260" cy="145" r="22" fill="rgba(150,142,132,.18)"/></svg>
+      </div>
+      <div class="gcard-ov"></div>
+      <div class="gcard-info"><div class="gcard-style">Minimalist</div><div class="gcard-name">Clean Dining Space</div><div class="gcard-loc">5-room HDB, Bishan</div></div>
+    </div>
+    <div class="gcard" data-style="industrial">
+      <div class="gcard-bg d-indust">
+        <svg width="100%" height="100%" viewBox="0 0 340 430" xmlns="http://www.w3.org/2000/svg"><rect width="340" height="430" fill="#2E2A24"/><rect x="20" y="120" width="300" height="240" rx="1" fill="rgba(255,255,255,.04)"/><rect x="20" y="120" width="135" height="240" rx="1" fill="rgba(255,255,255,.06)"/><rect x="163" y="120" width="157" height="115" rx="1" fill="rgba(245,196,0,.05)"/><rect x="163" y="243" width="157" height="117" rx="1" fill="rgba(245,196,0,.03)"/><rect x="28" y="132" width="119" height="9" rx="1" fill="rgba(245,196,0,.22)"/><rect x="28" y="156" width="119" height="9" rx="1" fill="rgba(255,255,255,.09)"/></svg>
+      </div>
+      <div class="gcard-ov"></div>
+      <div class="gcard-info"><div class="gcard-style">Industrial</div><div class="gcard-name">Loft-Style Study</div><div class="gcard-loc">Condo, Tanjong Pagar</div></div>
+    </div>
+    <div class="gcard" data-style="luxury">
+      <div class="gcard-bg d-luxury">
+        <svg width="100%" height="100%" viewBox="0 0 340 430" xmlns="http://www.w3.org/2000/svg"><rect width="340" height="430" fill="#B89858"/><rect x="25" y="230" width="290" height="130" rx="2" fill="rgba(255,255,255,.1)"/><rect x="35" y="215" width="270" height="90" rx="3" fill="rgba(255,255,255,.13)"/><rect x="50" y="228" width="95" height="70" rx="2" fill="rgba(255,255,255,.16)"/><rect x="158" y="228" width="135" height="70" rx="2" fill="rgba(255,255,255,.12)"/><circle cx="170" cy="125" r="52" fill="rgba(255,255,255,.1)"/><rect x="167" y="70" width="4" height="58" fill="rgba(255,255,255,.25)"/><ellipse cx="169" cy="70" rx="22" ry="9" fill="rgba(255,255,255,.3)"/></svg>
+      </div>
+      <div class="gcard-ov"></div>
+      <div class="gcard-info"><div class="gcard-style">Light Luxury</div><div class="gcard-name">Gold Accent Living</div><div class="gcard-loc">3-bed Condo, Orchard</div></div>
+    </div>
+  </div>
+  <div class="gallery-note rv">
+    <div class="gn-left">
+      <div class="gn-title">Want a look like these?</div>
+      <p class="gn-text">Our soft-furnishing design service creates a complete style direction and item list tailored to your space. Buy through us and the fee is fully offset.</p>
+    </div>
+    <div class="gn-right">
+      <div class="gn-price">S$300</div>
+      <div class="gn-waive">Offset when you order through us</div>
+      <a href="https://t.me/ustaysg" class="gn-btn">Get Your Design Plan →</a>
+    </div>
+  </div>
+</section>
+
+<!-- T&C -->
+<section class="tnc" id="tnc">
+  <div class="tnc-inner">
+    <div class="sec-top rv">
+      <div class="sec-label">Terms &amp; Conditions</div>
+      <h2 class="sec-h">Our <i>commitment</i> to you</h2>
+    </div>
+    <div class="tnc-grid rv">
+      <div class="tnc-card">
+        <div class="tnc-card-title">Orders &amp; Payment</div>
+        <ul>
+          <li>A deposit is required before production begins. Final balance is due prior to shipment.</li>
+          <li>All prices are quoted in SGD and inclusive of our service fee unless stated otherwise.</li>
+          <li>Lead times vary by item (typically 4–10 weeks). We confirm your timeline before you commit.</li>
+          <li>Orders may not be cancelled once production has commenced.</li>
+        </ul>
+      </div>
+      <div class="tnc-card">
+        <div class="tnc-card-title">Delivery &amp; Installation</div>
+        <ul>
+          <li>Delivery is to your Singapore address. Additional charges may apply for high-floor or no-lift access.</li>
+          <li>All items are inspected before handover. Notify us of any damage within 48 hours of delivery.</li>
+          <li>Installation is included for standard furniture. Electrical or carpentry work is not included.</li>
+          <li>We are not responsible for delays caused by port congestion, customs, or force majeure.</li>
+        </ul>
+      </div>
+      <div class="tnc-card">
+        <div class="tnc-card-title">Design Service</div>
+        <ul>
+          <li>The S$300 design fee covers one full soft-furnishing plan. Additional revisions are chargeable.</li>
+          <li>The fee is offset against your order total when you purchase through UStay within 90 days.</li>
+          <li>Design plans are for personal use only and may not be shared with other vendors.</li>
+          <li>UStay retains the right to use project photos for portfolio purposes unless you opt out.</li>
+        </ul>
+      </div>
+      <div class="tnc-card">
+        <div class="tnc-card-title">Quality &amp; Disputes</div>
+        <ul>
+          <li>We cannot guarantee exact colour matches to screen references due to monitor variance.</li>
+          <li>Minor variations in grain, texture, or shade are inherent to natural and handcrafted materials.</li>
+          <li>Any dispute should be raised in writing within 7 days of delivery for prompt investigation.</li>
+          <li>Our liability is limited to the value of the affected item(s) only.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="tnc-full rv">
+      <p>By engaging UStay's services — through Telegram, this website, or any other channel — you agree to these terms. Terms are subject to change; the most current version is always reflected on this page.</p>
+      <p>For any questions, please reach out via Telegram before placing an order. We are always happy to clarify.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="flogo">U<b>Stay</b></div>
+  <div class="fcopy">© 2025 UStay · Singapore · All rights reserved</div>
+  <a class="ftg" href="https://t.me/ustaysg">Telegram →</a>
+</footer>
+
+<a class="float-btn" href="https://t.me/ustaysg">💬 Chat with Us</a>
+
+<script>
+/* ══════════════════════════════════════
+   CURSOR
+══════════════════════════════════════ */
+const cur=document.getElementById('cur'),ring=document.getElementById('ring');
+let mx=window.innerWidth/2,my=window.innerHeight/2,rx=mx,ry=my;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function anim(){rx+=(mx-rx)*.1;ry+=(my-ry)*.1;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(anim)})();
+document.querySelectorAll('a,button,.path,.gcard,.wc').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='16px';cur.style.height='16px';ring.style.width='48px';ring.style.height='48px'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';ring.style.width='32px';ring.style.height='32px'});
+});
+
+/* ══════════════════════════════════════
+   PUZZLE INTRO
+══════════════════════════════════════ */
+(function(){
+  const stage = document.getElementById('stage');
+  const intro = document.getElementById('intro');
+
+  // Define puzzle pieces: text, final position (relative to stage center), start offset, size, class
+  const pieces = [
+    // Logo
+    { text:'UStay',       x:0,    y:-130, sx:-320, sy:-200, sz:'2rem',   cls:'',    delay:0   },
+    // Eyebrow tag
+    { text:'Singapore\'s Furniture Concierge',  x:0, y:-90, sx:250, sy:-280, sz:'.65rem', cls:'tag', delay:60 },
+    // Main line
+    { text:'Furnish your home',  x:0,  y:-42, sx:-280, sy:180, sz:'clamp(1.6rem,3.2vw,3rem)', cls:'', delay:120 },
+    // Balance words
+    { text:'beautifully',        x:-180, y:12, sx:300,  sy:-180, sz:'clamp(1.4rem,2.8vw,2.5rem)', cls:'yellow', delay:200 },
+    { text:'&',                  x:0,    y:12, sx:0,    sy:260,  sz:'1.2rem',  cls:'',     delay:240 },
+    { text:'cost-effectively',   x:185,  y:12, sx:-300, sy:200,  sz:'clamp(1.4rem,2.8vw,2.5rem)', cls:'',       delay:200 },
+    // Sub
+    { text:'Factory-direct · Design to Delivery',  x:0, y:68,  sx:200, sy:-300, sz:'.82rem', cls:'sub', delay:160 },
+    // Stats
+    { text:'↓50%',   x:-180, y:118, sx:-280, sy:280, sz:'1.5rem', cls:'stat-p',   delay:100 },
+    { text:'vs Local Showroom', x:-180, y:148, sx:-260, sy:220, sz:'.6rem', cls:'stat-l-p', delay:120 },
+    { text:'100%',  x:0,    y:118, sx:0,    sy:320, sz:'1.5rem', cls:'stat-p',   delay:140 },
+    { text:'End-to-End', x:0, y:148, sx:20,  sy:300, sz:'.6rem',  cls:'stat-l-p', delay:160 },
+    { text:'0',     x:180,  y:118, sx:280,  sy:280, sz:'1.5rem', cls:'stat-p',   delay:180 },
+    { text:'Overseas Hassle', x:180, y:148, sx:260, sy:220, sz:'.6rem', cls:'stat-l-p', delay:200 },
+  ];
+
+  pieces.forEach(p=>{
+    const el = document.createElement('div');
+    el.className = 'pz ' + (p.cls||'');
+    el.innerHTML = p.text;
+    el.style.fontSize = p.sz;
+    el.style.transform = `translate(calc(-50% + ${p.x + p.sx}px), calc(-50% + ${p.y + p.sy}px))`;
+    el.style.top = '50%'; el.style.left = '50%';
+    el.style.transition = 'none';
+    stage.appendChild(el);
+    p.el = el;
+  });
+
+  // Phase 1: pieces appear scattered (staggered)
+  pieces.forEach((p,i)=>{
+    setTimeout(()=>{
+      p.el.style.opacity = p.cls==='stat-l-p'?'0.5' : p.cls==='tag'?'0.4' : p.cls==='sub'?'0.55' : '1';
+    }, 80 + i*55);
+  });
+
+  // Phase 2: pieces fly to final position
+  const flyTime = 800;
+  const flyStart = 400;
+  pieces.forEach(p=>{
+    setTimeout(()=>{
+      p.el.style.transition = `transform ${flyTime}ms cubic-bezier(.22,1,.36,1) ${p.delay}ms, opacity ${flyTime}ms ease ${p.delay}ms`;
+      p.el.style.transform = `translate(calc(-50% + ${p.x}px), calc(-50% + ${p.y}px))`;
+    }, flyStart);
+  });
+
+  // Phase 3: flash yellow on "beautifully" & "cost-effectively" briefly
+  setTimeout(()=>{
+    const bEl = pieces.find(p=>p.text==='beautifully');
+    const cEl = pieces.find(p=>p.text==='cost-effectively');
+    if(bEl) bEl.el.style.textShadow='0 0 30px rgba(245,196,0,.8)';
+    if(cEl){ cEl.el.style.color='var(--yellow)'; cEl.el.style.textShadow='0 0 30px rgba(245,196,0,.8)';}
+  }, flyStart + flyTime + 200);
+
+  // Phase 4: brief hold, then dissolve intro and show hero
+  setTimeout(()=>{
+    // fade out glow
+    pieces.forEach(p=>{ p.el.style.textShadow='none'; p.el.style.transition='text-shadow .4s'; });
+  }, flyStart + flyTime + 700);
+
+  setTimeout(()=>{
+    intro.classList.add('done');
+    document.getElementById('mainNav').classList.add('visible');
+    document.getElementById('mainHero').classList.add('visible');
+  }, flyStart + flyTime + 1200);
+
+  setTimeout(()=>{ intro.style.display='none'; }, flyStart + flyTime + 1900);
+})();
+
+/* ══════════════════════════════════════
+   GALLERY FILTER
+══════════════════════════════════════ */
+document.getElementById('tabRow').addEventListener('click',e=>{
+  const btn=e.target.closest('.stab');
+  if(!btn)return;
+  document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  const f=btn.dataset.filter;
+  document.querySelectorAll('.gcard').forEach(c=>{
+    if(f==='all'||c.dataset.style===f){
+      c.style.display='block';
+      c.style.opacity='0';c.style.transform='scale(.97)';
+      requestAnimationFrame(()=>{c.style.transition='opacity .4s,transform .4s';c.style.opacity='1';c.style.transform='scale(1)'});
+    } else {
+      c.style.transition='opacity .25s';c.style.opacity='0';
+      setTimeout(()=>c.style.display='none',250);
+    }
+  });
+});
+
+/* ══════════════════════════════════════
+   SCROLL REVEAL
+══════════════════════════════════════ */
+const io=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('in'),i*80)});
+},{threshold:.1});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

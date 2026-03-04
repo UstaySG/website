@@ -502,7 +502,7 @@ const OurWork = () => {
 
           {/* Right */}
           <div className="w-1/3 flex flex-col items-start gap-6">
-            <div className="text-5xl font-serif font-bold text-[#C5A059]">
+            <div className="text-5xl font-serif font-bold text-[#F5C400]">
               S$300
             </div>
 
@@ -514,7 +514,7 @@ const OurWork = () => {
               href="https://t.me/ustaysg"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-white text-black px-10 py-4 rounded-md font-bold uppercase tracking-wide hover:bg-yellow-300 transition-all shadow-lg"
+              className="bg-[#F5C400] text-[#0D1B35] px-10 py-4 rounded-md font-bold uppercase tracking-wide hover:bg-yellow-300 transition-all shadow-lg"
             >
               Get Your Design Plan →
             </a>
@@ -582,22 +582,22 @@ const TermsAndConditions = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
           {sections.map((section, idx) => (
-            <motion.div 
+            <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`p-12 rounded-[3rem] border border-zinc-100 ${section.color} shadow-sm hover:shadow-md transition-shadow duration-500`}
+              className={`min-w-0 p-6 md:p-12 rounded-[3rem] border border-zinc-100 ${section.color} shadow-sm`}
             >
-              <h3 className="text-sm font-bold mb-10 tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-200/50 pb-5">
+              <h3 className="text-sm font-bold mb-8 tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-200/50 pb-4">
                 {section.title}
               </h3>
-              <ul className="space-y-6">
+
+              <ul className="space-y-5">
                 {section.items.map((item, iIdx) => (
-                  <li key={iIdx} className="text-zinc-600 leading-relaxed pl-6 relative">
-                    {/* <span className="w-1.5 h-1.5 mt-2 rounded-full bg-black/40"></span> */}
-                    <div className="absolute left-0 top-2.5 w-1.5 h-1.5 rounded-full bg-black" />
-                    {item}
+                  <li key={iIdx} className="flex items-start gap-3 text-zinc-600 leading-relaxed">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+                    <span>{item}</span>
                   </li>
                 ))}
               </ul>
@@ -634,7 +634,7 @@ const ChatButton = () => (
 );
 
 const Footer = () => (
-  <footer className="bg-white pt-24 pb-12 border-t border-zinc-100">
+  <footer className="bg-black pt-4 pb-12 border-t border-zinc-100">
     {/* <div className="max-w-7xl mx-auto px-6"> */}
       {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
         <div className="md:col-span-2">
@@ -673,11 +673,11 @@ const Footer = () => (
         </div>
       </div> */}
       
-      <div className="pt-12 border-t border-zinc-100 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-zinc-400">
-        <p>© 2026 UStay. All rights reserved.</p>
+      <div className="pt-4 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-zinc-400">
+        <p className="text-white">© 2026 UStay. All rights reserved.</p>
         <div className="flex gap-8">
-          <a href="#terms" className="hover:text-black">Privacy Policy</a>
-          <a href="#terms" className="hover:text-black">Terms of Service</a>
+          <a href="#terms" className="text-white hover:text-black">Privacy Policy</a>
+          <a href="#terms" className="text-white hover:text-black">Terms of Service</a>
         </div>
       </div>
     {/* </div> */}

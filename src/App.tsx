@@ -264,7 +264,8 @@ const WhyUs = () => {
   ];
 
   return (
-    <section id="why" className="py-24 bg-white border-y border-zinc-100">
+    <section id="why" className="why">
+    {/* <section id="why" className="py-24 bg-white border-y border-zinc-100"> */}
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center">
           <div className="text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Why UStay</div>
@@ -273,7 +274,7 @@ const WhyUs = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid-1-3">
           {reasons.map((reason, idx) => (
             <a 
               key={idx}
@@ -295,7 +296,7 @@ const WhyUs = () => {
 
 const HowWeWork = () => {
   return (
-    <section id="paths" className="py-24 bg-white border-y border-zinc-100">
+    <section id="paths" className="path">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center">
           <div className="text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">How We Work</div>
@@ -304,7 +305,7 @@ const HowWeWork = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div className="grid-1-2">
           {/* Path One */}
           <div className="p-10 md:p-16 rounded-[3.5rem] bg-white border border-[#E5D5C0] flex flex-col items-center text-center shadow-sm relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-[#E5D5C0] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
@@ -425,7 +426,8 @@ const OurWork = () => {
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-24">
+        <div className="grid-1-2">
+        {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-24"> */}
           {filteredCategories.map((cat, idx) => (
             <Link 
               key={idx}
@@ -483,8 +485,9 @@ const OurWork = () => {
           ))}
         </div>
 
+
         {/* Gallery Note / Advertising Banner */}
-        <div className="bg-[#1A1A1A] rounded-[2rem] px-12 py-16 
+        <div className="mt-20 p-12 md:p-16 bg-[#1A1A1A] rounded-[2rem] px-12 py-16
                 flex flex-row items-center justify-between 
                 shadow-xl gap-16">
 
@@ -580,7 +583,7 @@ const TermsAndConditions = () => {
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+        <div className="grid-1-2">
           {sections.map((section, idx) => (
             <motion.div
               key={idx}

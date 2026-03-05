@@ -71,4 +71,42 @@
     white-space: nowrap;
     animation: marquee 40s linear infinite;
   }
+
+  .why{
+    background-color: #f0f2f2;
+    border-color: #c1c1c1;
+    padding: 30px;
+
+  }
+
+  .grid-1-3 {
+    display: grid;
+    grid-template-columns: 1fr;  /* default: 1 column */
+    gap: 8px;                  /* adjust spacing */
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .grid-1-3 {
+      grid-template-columns: repeat(3, 1fr); /* 3 columns */
+    }
+  }
+
+  .path{
+    background-color: #fffff7;
+    border-color: #c1c1c1;
+    padding: 30px;
+
+  }
+
+  .grid-1-2 {
+    display: grid;
+    grid-template-columns: 1fr;  /* default: 1 column */
+    gap: 8px;                  /* adjust spacing */
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .grid-1-2 {
+      grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    }
+  }
 }

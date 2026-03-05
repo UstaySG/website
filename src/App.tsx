@@ -1,9 +1,24 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Instagram, Mail, Menu, X, Send } from 'lucide-react';
+import { MessageCircle, Instagram, Facebook, Mail, Menu, X, Send } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import SplashScreen from './components/SplashScreen';
 import PortfolioPage from './pages/PortfolioPage';
+
+const LinkedInIcon = ({ size = 24 }: { size?: number }) => (
+  <svg
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M4.98 3.5C4.98 4.88 3.87 6 2.5 6C1.12 6 0 4.88 0 3.5C0 2.12 1.12 1 2.5 1C3.87 1 4.98 2.12 4.98 3.5ZM0.5 23.5H4.5V7.98H0.5V23.5ZM8.5 7.98H12.3V10.1H12.35C12.88 9.1 14.18 8.04 16.12 8.04C20.2 8.04 21 10.68 21 14.12V23.5H17V15.22C17 13.24 16.96 10.7 14.25 10.7C11.5 10.7 11.08 12.84 11.08 15.08V23.5H7.1V7.98H8.5Z"
+      fill="currentColor"
+    />
+  </svg>
+);
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
@@ -551,6 +566,116 @@ const OurWork = () => {
   );
 };
 
+const PrivacyPolicy = () => {
+  const sections = [
+    {
+      title: "Data We Collect",
+      items: [
+        "Contact details (name, phone, email, messaging handles).",
+        "Service details (quotes, orders, delivery address, communications).",
+        "Media you share (photos, floor plans, measurements, design references).",
+        "Website technical data (IP, device/browser, pages viewed, cookies if enabled)."
+      ],
+      color: "bg-[#FDF8F3]"
+    },
+    {
+      title: "How We Use Data",
+      items: [
+        "Respond to enquiries and provide quotations.",
+        "Coordinate sourcing, shipping, delivery, and installation.",
+        "Process payments, issue invoices, and manage accounts.",
+        "Provide after-sales support and improve our services."
+      ],
+      color: "bg-[#F5F5F0]"
+    },
+    {
+      title: "Sharing & Transfers",
+      items: [
+        "We share data only as needed with logistics partners, suppliers, and IT vendors.",
+        "Some suppliers may be overseas; we take reasonable steps to protect transferred data.",
+        "We may disclose data to authorities where required by law."
+      ],
+      color: "bg-[#F0F4F8]"
+    },
+    {
+      title: "Retention & Your Rights",
+      items: [
+        "We keep data only as long as needed for service and legal/record purposes.",
+        "You may request access or correction of your personal data.",
+        "You can withdraw consent, but services may be affected."
+      ],
+      color: "bg-[#FAF9F6]"
+    }
+  ];
+
+  return (
+    <section id="privacy" className="py-24 bg-white border-t border-zinc-100">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="mb-16 text-center">
+          <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">
+            Privacy Policy
+          </div>
+          <h2 className="font-title font-serif font-bold text-zinc-900">
+            How we <i className="font-normal italic">protect</i> your data
+          </h2>
+        </div>
+
+        <div className="grid-1-2">
+          {sections.map((section, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className={`min-w-0 p-8 md:p-14 rounded-[3rem] border border-zinc-100 ${section.color} shadow-sm`}
+            >
+              <h3 className="font-note font-bold mb-8 tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-200/50 pb-4">
+                {section.title}
+              </h3>
+
+              <ul className="space-y-5">
+                {section.items.map((item, iIdx) => (
+                  <li key={iIdx} className="flex items-start gap-3 text-zinc-600 leading-relaxed font-content">
+                    <span className="mt-2 w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </motion.div>
+          ))}
+        </div>
+
+        <div className="mt-20 p-12 md:p-16 bg-darkcyan rounded-[4rem] font-cream text-sm leading-relaxed shadow-2xl border border-white/5 relative overflow-hidden">
+          <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mb-32 blur-2xl" />
+          <div className="relative z-10">
+            <p className="mb-6 font-note font-serif leading-relaxed">
+              By contacting UStay via WhatsApp, Telegram, this website, or any other channel, you consent to us collecting and using your data to provide our services. We only share data where needed for fulfilment.
+            </p>
+            <p className="mb-0 font-note font-serif leading-relaxed">
+              For privacy requests (access/correction/withdrawal), contact us via{" "}
+              <a
+                href="mailto:clientservice@ustaysingapore.com" className="font-bold underline text-zinc-300 transition-colors"
+              >
+                email
+              </a>{" "}
+              or{" "}
+              <a
+                href="https://wa.me/6589904529"
+                target="_blank"
+                rel="noreferrer"
+                className="font-bold underline text-zinc-300 transition-colors"
+              >
+                WhatsApp
+              </a>
+              .
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
 const TermsAndConditions = () => {
   const sections = [
     {
@@ -599,8 +724,8 @@ const TermsAndConditions = () => {
     <section id="terms" className="py-24 bg-white border-t border-zinc-100">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center">
-          <div className="text-xs md:text-sm tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Terms & Conditions</div>
-          <h2 className="text-4xl md:text-6xl font-serif font-bold text-zinc-900">
+          <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Terms & Conditions</div>
+          <h2 className="font-title font-serif font-bold text-zinc-900">
             Our <i className="font-normal italic">commitment</i> to you
           </h2>
         </div>
@@ -614,13 +739,13 @@ const TermsAndConditions = () => {
               viewport={{ once: true }}
               className={`min-w-0 p-8 md:p-14 rounded-[3rem] border border-zinc-100 ${section.color} shadow-sm`}
             >
-              <h3 className="text-sm font-bold mb-8 tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-200/50 pb-4">
+              <h3 className="font-note mb-8 tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-200/50 pb-4">
                 {section.title}
               </h3>
 
               <ul className="space-y-5">
                 {section.items.map((item, iIdx) => (
-                  <li key={iIdx} className="flex items-start gap-3 text-zinc-600 leading-relaxed md:text-lg">
+                  <li key={iIdx} className="flex items-start gap-3 text-zinc-600 leading-relaxed font-content">
                     <span className="mt-2 w-1.5 h-1.5 rounded-full bg-black shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -630,14 +755,14 @@ const TermsAndConditions = () => {
           ))}
         </div>
 
-        <div className="mt-20 p-12 md:p-16 bg-grey rounded-[4rem] text-zinc-400 text-sm leading-relaxed shadow-2xl border border-white/5 relative overflow-hidden">
+        <div className="mt-20 p-12 md:p-16 bg-darkcyan rounded-[4rem] text-zinc-100 text-sm leading-relaxed shadow-2xl border border-white/5 relative overflow-hidden">
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mb-32 blur-2xl" />
           <div className="relative z-10">
-            <p className="mb-8 text-xl md:text-2xl font-warmorange font-serif leading-relaxed">
+            <p className="mb-4 font-content font-serif leading-relaxed">
               By engaging UStay's services — through Telegram, this website, or any other channel — you agree to these terms. Terms are subject to change; the most current version is always reflected on this page.
             </p>
-            <p className="mb-8 text-xl md:text-2xl font-warmorange font-serif leading-relaxed">
-              For any questions, please reach out via <a href="https://wa.me/6589904529" className="font-warmorange font-bold underline hover:text-zinc-300 transition-colors">WhatsApp</a> before placing an order. We are always happy to clarify.
+            <p className="mb-4 font-note font-serif leading-relaxed">
+              For any questions, please reach out via <a href="https://wa.me/6589904529" className="text-zinc-300 font-bold underline transition-colors">WhatsApp</a> before placing an order. We are always happy to clarify.
             </p>
           </div>
         </div>
@@ -651,9 +776,10 @@ const ChatButton = () => (
     href="https://wa.me/6589904529"
     target="_blank"
     rel="noopener noreferrer"
-    className="fixed bottom-8 right-8 z-[60] bg-[#2481cc] text-white px-6 py-4 rounded-full font-bold shadow-2xl flex items-center gap-3 hover:scale-105 transition-transform group"
+    className="fixed bottom-8 right-8 z-[60] bg-[#25d366] text-white px-6 py-4 rounded-full font-bold shadow-2xl flex items-center gap-3 hover:scale-105 transition-transform group"
   >
-    <Send className="w-2 h-2 bg-white animate-pulse" />
+    <MessageCircle size={20}/>
+     {/* className="w-2 h-2 bg-white animate-pulse" /> */}
     CHAT WITH US
   </a>
 );
@@ -699,16 +825,20 @@ const Footer = () => (
       </div> */}
       
       <div className="pt-4 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-zinc-400">
-        <ul id="media">
-          <li><a href="https://t.me/ustaysg" className="hover:text-black transition-colors">Telegram: @ustaysg</a></li>
-          <li>CSS</li>
-          <li>JavaScript</li>
-          <li>PHP</li>
+        <ul id="media" className="flex gap-8">
+          <li><a href="https://t.me/ustaysg" target="_blank" rel="noopener noreferrer"><Send size={24}/></a></li>
+          <li><a href="mailto:clientservice@ustaysingapore.com"><Mail size={24}/></a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61552263188169" target="_blank" rel="noopener noreferrer"><Facebook size={24}/></a></li>
+          <li><a href="https://www.instagram.com/ustaysg/" target="_blank" rel="noopener noreferrer"><Instagram size={24}/></a></li>
+          <li><a href="https://x.com/UstaySG" target="_blank" rel="noopener noreferrer"><X size={24}/></a></li>
+          <li><a href="https://www.linkedin.com/in/ustay-singapore-0a42a53b4/" target="_blank" rel="noopener noreferrer"><LinkedInIcon/></a></li>
         </ul> 
         <p className="font-cream font-slabel">© 2026 UStay. All rights reserved.</p>
         <div className="flex gap-12 font-cream font-slabel">
-          <a href="#terms" className="text-white hover:text-black">Privacy Policy</a>
-          <a href="#terms" className="text-white hover:text-black">Terms of Service</a>
+          {/* <a href="#terms" className="text-white hover:text-black">Privacy Policy</a> */}
+          {/* <a href="#terms" className="text-white hover:text-black">Terms of Service</a> */}
+          <PrivacyModalTrigger/>
+          <TermsModalTrigger/>
         </div>
       </div>
     {/* </div> */}
@@ -759,6 +889,131 @@ export default function App() {
         <Footer />
       </div>
     </Router>
+  );
+
+  
+}
+
+
+export function PrivacyModalTrigger() {
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    if (open) document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <>
+      {/* Footer item */}
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="text-zinc-300 transition-colors"
+      >
+        Privacy Policy
+      </button>
+
+      {open && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center px-4" role="dialog" aria-modal="true">
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
+
+          {/* Panel */}
+          <div className="relative w-full max-w-6xl rounded-[2.5rem] bg-white shadow-2xl border border-zinc-200 overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 md:px-8 py-4 border-b border-zinc-100">
+              <div className="text-sm tracking-[0.3em] uppercase font-bold text-zinc-400">
+                Privacy Policy
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center
+                           text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all"
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Scroll area */}
+            <div className="max-h-[80vh] overflow-y-auto">
+              <PrivacyPolicy />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
+
+
+export function TermsModalTrigger() {
+  const [open, setOpen] = React.useState(false);
+
+  React.useEffect(() => {
+    const onKeyDown = (e) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    if (open) document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = "";
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
+
+  return (
+    <>
+      {/* Footer link */}
+      <button
+        type="button"
+        onClick={() => setOpen(true)}
+        className="text-zinc-300 transition-colors"
+      >
+        Terms of Service
+      </button>
+
+      {/* Modal */}
+      {open && (
+        <div className="fixed inset-0 z-[999] flex items-center justify-center px-4" role="dialog" aria-modal="true">
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
+
+          {/* Panel */}
+          <div className="relative w-full max-w-6xl rounded-[2.5rem] bg-white shadow-2xl border border-zinc-200 overflow-hidden">
+            {/* Header */}
+            <div className="flex items-center justify-between px-5 md:px-8 py-4 border-b border-zinc-100">
+              <div className="font-subtitle tracking-[0.3em] uppercase font-bold text-zinc-400">
+                Terms & Conditions
+              </div>
+              <button
+                type="button"
+                onClick={() => setOpen(false)}
+                className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center
+                           text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all"
+                aria-label="Close"
+              >
+                <X size={18} />
+              </button>
+            </div>
+
+            {/* Scrollable content */}
+            <div className="max-h-[80vh] overflow-y-auto">
+              <TermsAndConditions />
+            </div>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

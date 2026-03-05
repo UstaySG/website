@@ -21,6 +21,9 @@
   ul#media li {
     display:inline;
   }
+  ul#media li:hover{
+    color: #f6f1e8;
+  }
 
   .glass {
     backdrop-filter: blur(24px);

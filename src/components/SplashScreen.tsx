@@ -82,18 +82,18 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           beautifully, cost-effectively
         </motion.p>
 
-        {/* Row 5: Factory-direct * Design to Delivery */}
+        {/* Row 5: Factory-direct · Design to Delivery */}
         <motion.div 
           variants={itemVariants}
           className="flex items-center gap-4 md:gap-8 py-4 border-y border-white/5 w-full justify-center text-[#C5A059]"
         >
           <span className="text-xl md:text-3xl font-serif font-bold">Factory-direct</span>
-          <span className="text-zinc-700 text-2xl font-light">*</span>
+          <span className="text-zinc-700 text-2xl font-light">·</span>
           <span className="text-xl md:text-3xl font-serif font-bold">Design to Delivery</span>
         </motion.div>
 
         {/* Row 6: Stats Grid */}
-        <div className="flex flex-row items-start justify-center gap-6 md:gap-24 w-full pt-4">
+        <div className="grid-1-3 flex flex-row items-start justify-center gap-6 md:gap-24 w-full pt-4">
           {[
             { num: "50%", label: "vs LOCAL SHOWROOM" },
             { num: "100%", label: "END-TO-END" },

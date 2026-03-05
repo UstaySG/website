@@ -18,6 +18,10 @@
 }
 
 @layer utilities {
+  ul#media li {
+    display:inline;
+  }
+
   .glass {
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
@@ -72,11 +76,33 @@
     animation: marquee 40s linear infinite;
   }
 
+  .hero{
+    background-color: rgba(251, 247, 250, 0.2);
+    
+  }
+
   .why{
-    background-color: #f0f2f2;
+    background-color: #efe7db;
     border-color: #c1c1c1;
     padding: 30px;
+    padding-top: 96px;
+    padding-bottom: 96px;
 
+  }
+
+  .path{
+    background-color: #f6f1e8;
+    border-color: #c1c1c1;
+    padding-top: 96px;
+    padding-bottom: 96px;
+
+  }
+
+  .gallery{
+    background-color: #fbf7f0;
+    border-color: #f4f4f5;
+    padding-top: 96px;
+    padding-bottom: 96px;
   }
 
   .grid-1-3 {
@@ -91,13 +117,6 @@
     }
   }
 
-  .path{
-    background-color: #fffff7;
-    border-color: #c1c1c1;
-    padding: 30px;
-
-  }
-
   .grid-1-2 {
     display: grid;
     grid-template-columns: 1fr;  /* default: 1 column */
@@ -108,5 +127,193 @@
     .grid-1-2 {
       grid-template-columns: repeat(2, 1fr); /* 2 columns */
     }
+  }
+
+  .gap-8-96 {
+    gap: 8px;                  /* adjust spacing */
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .gap-8-96 {
+      gap: 96px; /* 2 columns */
+    }
+  }
+
+  .font-title{
+    font-size: 36px;
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .font-title{
+      font-size: 60px;
+    }
+  }
+
+  .font-note{
+    font-size: 18px;
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .font-note{
+      font-size: 22px;
+    }
+  }
+
+  .font-subtitle{
+    font-size: 14px;
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .font-subtitle{
+      font-size: 18px;
+    }
+  }
+
+  .font-llabel{
+    font-size: 24px;
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .font-llabel{
+      font-size: 36px;
+    }
+  }
+
+  .font-slabel{
+    font-size: 12px;
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .font-slabel{
+      font-size: 16px;
+    }
+  }
+
+  .font-content{
+    font-size: 16px;
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .font-content{
+      font-size: 20px;
+    }
+  }
+
+  .text-zinc-300{
+    color: #d4d4d8
+  }
+  .text-zinc-300:hover{
+    color: #a1a1aa
+  }
+
+  .text-zinc-400{
+    color: #a1a1aa
+  }
+
+  .text-zinc-500{
+    color: #71717a
+  }
+
+  .text-zinc-600{
+    color: #52525b
+  }
+  
+  .text-zinc-800{
+    color: #27272a
+  }
+
+  .text-zinc-900{
+    color: #18181b
+  }
+
+  .font-warmblack {
+    color: #1c1b19;
+  }
+
+  .font-darkbrown {
+    color: #2b2926
+  }
+
+  .font-greybrown{
+    color: #4b4640
+  }
+
+  .font-smokybrown{
+    color: #3a3733
+  }
+
+  .font-warmgrey{
+    color: #7a746c
+  }
+
+  .font-cream{
+    color: #f6f1e8;
+  }
+
+    .bg-warmblack {
+    background-color: #1c1b19;
+  }
+
+  .bg-darkbrown {
+    background-color: #2b2926
+  }
+
+  .bg-greybrown{
+    background-color: #4b4640
+  }
+
+  .bg-smokybrown{
+    background-color: #3a3733
+  }
+
+  .bg-warmgrey{
+    background-color: #7a746c
+  }
+
+  .bg-cream{
+    background-color: #efe7db;
+  }
+
+  .bg-pinkcream{
+    background-color: #fbf7f0;
+  }
+
+  .bg-greycream{
+    background-color: #f6f1e8;
+  }
+
+  .bg-darkcyan{
+    background-color: #1f3a34;
+  }
+
+  .bg-brown{
+    background-color: #c47a5a;
+  }
+
+  .bg-grey{
+    background-color: #b8b1a7;
+  }
+
+  .bg-black-40{
+    background-color: rgba(0, 0, 0, 0.4)
+
+  }
+
+  .white-button{
+    border: 1px solid #4b4640;
+    background-color: #f6f1e8;
+    color: #3a3733
+  }
+  .white-button:hover{
+    background-color: #efe7db;
+  }
+
+  .black-button{
+    border: 1px solid #c47a5a ;
+    background-color: #4b4640;
+    color: #f6f1e8
+  }
+  .black-button:hover{
+    background-color: #2b2926;
   }
 }

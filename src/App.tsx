@@ -76,7 +76,7 @@ const Navbar = () => {
 };
 
 const Hero = () => (
-  <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-32 pb-20 bg-black text-white">
+  <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-32 pb-20 hero">
     {/* Background Image */}
     <div className="absolute inset-0 z-0 opacity-20">
       <img 
@@ -96,12 +96,12 @@ const Hero = () => (
       </div>
     </div>
 
-    <div className="relative z-10 text-center px-6 max-w-5xl flex flex-col items-center">
+    <div className="relative z-10 text-center px-6 max-w-6xl flex flex-col items-center">
       {/* hero-eyebrow */}
       <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold text-zinc-500 mb-8"
+        className="font-subtitle tracking-[0.4em] uppercase font-bold font-greybrown mb-8"
       >
         Singapore's Furniture Concierge · Condo & BTO Specialists
       </motion.div>
@@ -111,7 +111,7 @@ const Hero = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="text-4xl md:text-7xl font-serif font-bold mb-12"
+        className="font-title font-serif font-bold mb-12 font-warmblack"
       >
         Furnish your home
       </motion.h1>
@@ -128,12 +128,12 @@ const Hero = () => (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-zinc-800 border border-zinc-700 rounded-full z-20" />
         </div>
         
-        <div className="flex justify-between w-full px-4 md:px-12">
+        <div className="flex justify-between w-full px-0 md:px-12">
           {/* Left Pan */}
           <div className="flex flex-col items-center">
             <div className="w-px h-16 bg-zinc-800" />
             <div className="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm">
-              <span className="text-xl md:text-3xl font-serif italic text-stone-200">beautifully</span>
+              <span className="font-llabel font-serif italic font-darkbrown">beautifully</span>
             </div>
           </div>
 
@@ -141,16 +141,16 @@ const Hero = () => (
           <div className="flex flex-col items-center">
             <div className="w-px h-16 bg-zinc-800" />
             <div className="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm">
-              <span className="text-xl md:text-3xl font-serif italic text-stone-200">cost-effectively</span>
+              <span className="font-llabel font-serif italic font-darkbrown">affordably</span>
             </div>
           </div>
         </div>
 
         {/* Scale Post */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-zinc-800 -z-10" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-black -z-10" />
         
         {/* Scale And */}
-        <div className="mt-8 text-[10px] tracking-[0.3em] uppercase font-bold text-zinc-600">
+        <div className="mt-8 font-slabel tracking-[0.3em] uppercase font-bold font-darkbrown">
           equally important
         </div>
       </motion.div>
@@ -160,7 +160,7 @@ const Hero = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="text-ios-secondary-label max-w-2xl mb-12 text-lg leading-relaxed"
+        className="text-ios-secondary-label max-w-2xl mb-12 font-note leading-relaxed"
       >
         Factory-direct furniture from trusted manufacturers — with full design guidance, ordering, and delivery handled for you.
       </motion.p>
@@ -170,12 +170,12 @@ const Hero = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="flex flex-row gap-4 mb-20 justify-center"
+        className="flex flex-row gap-24 mb-20 justify-center"
       >
-        <a href="#paths" className="bg-white text-black px-8 md:px-10 py-4 rounded-full font-bold hover:bg-zinc-200 transition-all text-sm md:text-base">
+        <a href="#paths" className="white-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-slabel">
           Start Your Journey
         </a>
-        <a href="#gallery" className="border border-white/20 text-white px-8 md:px-10 py-4 rounded-full font-bold hover:bg-white/5 transition-all text-sm md:text-base">
+        <a href="#gallery" className="black-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-slabel">
           See Our Work
         </a>
       </motion.div>
@@ -185,26 +185,26 @@ const Hero = () => (
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.6 }}
-        className="flex flex-wrap justify-center gap-8 md:gap-16 border-t border-white/5 pt-12 w-full"
+        className="flex flex-wrap justify-center gap-8-96 border-t border-white/5 pt-12 w-full"
       >
         <div className="flex flex-col items-center gap-1">
-          <div className="text-2xl md:text-4xl font-serif font-bold text-white">↓50%</div>
-          <div className="text-[10px] uppercase tracking-widest text-zinc-500">vs Local Showroom</div>
+          <div className="font-llabel font-serif font-bold font-warmgrey">↓50%</div>
+          <div className="font-slabel uppercase tracking-widest text-zinc-500">vs Local Showroom</div>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="text-2xl md:text-4xl font-serif font-bold text-white">100%</div>
-          <div className="text-[10px] uppercase tracking-widest text-zinc-500">Managed for You</div>
+          <div className="font-llabel font-serif font-bold font-warmgrey">100%</div>
+          <div className="font-slabel uppercase tracking-widest text-zinc-500">Managed for You</div>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="text-2xl md:text-4xl font-serif font-bold text-white">0</div>
-          <div className="text-[10px] uppercase tracking-widest text-zinc-500">Overseas Hassle</div>
+          <div className="font-llabel font-serif font-bold font-warmgrey">0</div>
+          <div className="font-slabel uppercase tracking-widest text-zinc-500">Overseas Hassle</div>
         </div>
       </motion.div>
     </div>
 
     {/* scroll-down */}
     <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 opacity-30">
-      <div className="w-px h-12 bg-white" />
+      <div className="w-px h-12 bg-black" />
       <div className="text-[10px] uppercase tracking-[0.4em]">Scroll</div>
     </div>
   </section>
@@ -240,7 +240,7 @@ const WhyUs = () => {
     {
       id: "01",
       title: "Factory-Direct Pricing",
-      description: "We cut out the middlemen. Premium quality at prices local showrooms can't match. See our past projects.",
+      description: "We cut out the middlemen. Premium quality at prices local showrooms can't match.\nSee our past projects →.",
       link: "#gallery",
       color: "bg-[#FDF8F3]",
       borderColor: "border-[#E5D5C0]"
@@ -248,7 +248,7 @@ const WhyUs = () => {
     {
       id: "02",
       title: "Curated Quality",
-      description: "Every piece sourced from manufacturers we personally trust. No guesswork, no quality lottery. Start a quote.",
+      description: "Every piece sourced from manufacturers we personally trust. No guesswork, no quality lottery.\nStart a quote →.",
       link: "#paths",
       color: "bg-[#F5F5F0]",
       borderColor: "border-[#D1D1CB]"
@@ -256,7 +256,7 @@ const WhyUs = () => {
     {
       id: "03",
       title: "Singapore-Side Support",
-      description: "We manage shipping, customs, delivery, and installation end to end. Chat with us on Telegram.",
+      description: "We manage shipping, customs, delivery, and installation end to end.\nChat with us on Telegram →.",
       link: "https://t.me/ustaysg",
       color: "bg-[#F0F4F8]",
       borderColor: "border-[#D1D9E6]"
@@ -266,10 +266,10 @@ const WhyUs = () => {
   return (
     <section id="why" className="why">
     {/* <section id="why" className="py-24 bg-white border-y border-zinc-100"> */}
-      <div className="max-w-7xl mx-auto px-6">
+      <div className="max-w-8xl mx-auto px-6">
         <div className="mb-16 text-center">
-          <div className="text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Why UStay</div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-zinc-900">
+          <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-8">Why UStay</div>
+          <h2 className="font-title font-serif font-bold text-zinc-900">
             The smarter way to <i className="font-normal italic">furnish</i>
           </h2>
         </div>
@@ -281,11 +281,11 @@ const WhyUs = () => {
               href={reason.link}
               className={`p-10 rounded-[2.5rem] border ${reason.borderColor} ${reason.color} flex flex-col h-full transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group`}
             >
-              <div className="text-4xl font-serif font-bold text-zinc-300 mb-8 group-hover:text-zinc-400 transition-colors">
+              <div className="font-llabel font-serif font-bold text-zinc-300 mb-10 transition-colors">
                 {reason.id}
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-zinc-800">{reason.title}</h3>
-              <p className="text-zinc-600 leading-relaxed">{reason.description}</p>
+              <h3 className="font-llabel font-bold mb-5 text-zinc-800">{reason.title}</h3>
+              <p className="text-zinc-600 leading-relaxed font-content whitespace-pre-line">{reason.description}</p>
             </a>
           ))}
         </div>
@@ -299,53 +299,53 @@ const HowWeWork = () => {
     <section id="paths" className="path">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center">
-          <div className="text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">How We Work</div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-zinc-900">
+          <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">How We Work</div>
+          <h2 className="font-title font-serif font-bold text-zinc-900">
             Pick your <i className="font-normal italic">path</i>
           </h2>
         </div>
 
         <div className="grid-1-2">
           {/* Path One */}
-          <div className="p-10 md:p-16 rounded-[3.5rem] bg-white border border-[#E5D5C0] flex flex-col items-center text-center shadow-sm relative overflow-hidden group">
+          <div className="p-12 md:p-20 rounded-[3.5rem] bg-white border border-[#E5D5C0] flex flex-col items-center text-center shadow-sm relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-[#E5D5C0] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
-            <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-[#C5A059] mb-8">Path One</div>
-            <h3 className="text-4xl md:text-5xl font-serif font-bold mb-10 leading-tight text-zinc-800">I know<br />what I want</h3>
-            <ul className="space-y-6 mb-12 text-zinc-500 font-medium text-lg">
+            <div className="font-slabel tracking-[0.4em] uppercase font-bold text-[#C5A059] mb-10">Path One</div>
+            <h3 className="font-llabel font-serif font-bold mb-12 leading-tight text-zinc-800">I know<br />what I want</h3>
+            <ul className="space-y-8 mb-14 text-zinc-500 font-medium font-note">
               <li>Send photos or floor plan</li>
               <li>We source & quote</li>
               <li>Approve — we deliver</li>
             </ul>
             <a 
-              href="https://t.me/ustaysg" 
+              href="https://wa.me/6589904529"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#1A1A1A] text-white px-12 py-5 rounded-full font-bold flex items-center gap-2 hover:bg-black transition-all shadow-lg text-lg"
+              className="bg-[#1f3a34] text-white px-14 py-6 rounded-full font-bold flex items-center gap-2 hover:bg-black transition-all shadow-lg font-note"
             >
-              Start a Quote →
+              Start a Quote
             </a>
           </div>
 
           {/* Path Two */}
-          <div className="p-10 md:p-16 rounded-[3.5rem] bg-[#1A1A1A] text-white flex flex-col items-center text-center shadow-2xl relative overflow-hidden group">
+          <div className="p-12 md:p-20 rounded-[3.5rem] bg-[#1f3a34] text-white flex flex-col items-center text-center shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
-            <div className="text-[10px] tracking-[0.4em] uppercase font-bold text-zinc-500 mb-8">Path Two</div>
-            <h3 className="text-4xl md:text-5xl font-serif font-bold mb-10 leading-tight">I need a<br />design first</h3>
-            <ul className="space-y-6 mb-12 text-zinc-400 text-lg">
+            <div className="font-slabel tracking-[0.4em] uppercase font-bold text-zinc-500 mb-10">Path Two</div>
+            <h3 className="font-llabel md:text-6xl font-serif font-bold mb-12 leading-tight">I need a<br />design first</h3>
+            <ul className="space-y-8 mb-14 text-zinc-400 font-note">
               <li>Get a full soft-furnishing plan</li>
               <li>Style direction + item list</li>
               <li>Buy through us — fee offset</li>
             </ul>
-            <div className="flex flex-col items-center gap-4">
+            <div className="flex flex-col items-center gap-5">
               <a 
-                href="https://t.me/ustaysg" 
+                href="https://wa.me/6589904529"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-white text-black px-12 py-5 rounded-full font-bold flex items-center gap-2 hover:bg-zinc-200 transition-all shadow-xl text-lg"
+                className="bg-white text-black px-14 py-6 rounded-full font-bold flex items-center gap-2 hover:bg-zinc-200 transition-all shadow-xl font-note"
               >
-                Explore Design →
+                Explore Design
               </a>
-              <span className="text-sm text-zinc-500 font-bold tracking-[0.2em] uppercase">From S$300</span>
+              <span className="font-slabel font-cream font-bold tracking-[0.2em] uppercase">From S$300</span>
             </div>
           </div>
         </div>
@@ -401,11 +401,11 @@ const OurWork = () => {
     : categories.filter(c => c.style === activeFilter || activeFilter === 'all'); // Simple filter for demo
 
   return (
-    <section id="gallery" className="py-24 bg-white border-b border-zinc-100">
+    <section id="gallery" className="gallery">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center">
-          <div className="text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Our Work</div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-zinc-900">
+          <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Our Work</div>
+          <h2 className="font-title font-serif font-bold text-zinc-900">
             Past designs we've <i className="font-normal italic">created</i>
           </h2>
         </div>
@@ -415,10 +415,10 @@ const OurWork = () => {
             <button
               key={filter.id}
               onClick={() => setActiveFilter(filter.id)}
-              className={`px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase transition-all duration-300 border ${
+              className={`px-6 py-2.5 rounded-full font-slabel font-bold tracking-widest uppercase transition-all duration-300 border ${
                 activeFilter === filter.id 
-                ? 'bg-black text-white border-black shadow-lg' 
-                : 'bg-white text-zinc-400 border-zinc-100 hover:border-zinc-300 hover:text-zinc-600'
+                ? 'bg-brown font-cream border-black shadow-lg' 
+                : 'bg-white font-warmblack border-[#f4f4f5] hover:border-zinc-300 hover:text-zinc-600'
               }`}
             >
               {filter.label}
@@ -426,7 +426,7 @@ const OurWork = () => {
           ))}
         </div>
 
-        <div className="grid-1-2">
+        <div className={activeFilter === "all" ? "grid-1-2 font-cream" : "grid grid-cols-1 gap-10 mb-24 font-cream"}>
         {/* <div className="grid grid-cols-1 md:grid-cols-2 gap-10 mb-24"> */}
           {filteredCategories.map((cat, idx) => (
             <Link 
@@ -448,7 +448,7 @@ const OurWork = () => {
                 <motion.img 
                   variants={{
                     initial: { scale: 1 },
-                    hover: { scale: 1.1 }
+                    hover: { scale: 1.2 }
                   }}
                   transition={{ duration: 0.7, ease: "easeOut" }}
                   src={cat.img} 
@@ -462,19 +462,40 @@ const OurWork = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 
                 <div className="absolute inset-x-6 bottom-6 md:inset-x-10 md:bottom-10">
-                  <motion.div 
+                  {/* <motion.div 
                     variants={{
                       initial: { y: "65%" },
                       hover: { y: 0 }
                     }}
                     transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="bg-black/40 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] shadow-2xl"
+                    className="bg-black-40 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] shadow-2xl"
                   >
-                    <h3 className="text-2xl md:text-3xl font-serif font-bold text-white mb-4 tracking-tight">{cat.title}</h3>
+                    <h3 className="font-llabel font-serif font-bold font-cream mb-4 tracking-tight">{cat.title}</h3>
                     <div className="h-px w-12 bg-white/20 mb-6" />
                     <div className="space-y-3">
-                      <span className="block text-[18px] uppercase tracking-[0.4em] text-white font-bold">Brand Expression</span>
-                      <p className="text-white text-[16px] md:text-base leading-relaxed font-medium">
+                      <span className="block font-subtitle uppercase tracking-[0.4em] font-cream font-bold">Brand Expression</span>
+                      <p className="font-cream font-content leading-relaxed font-medium">
+                        {cat.expression}
+                      </p>
+                    </div>
+                  </motion.div> */}
+                  <motion.div
+                    variants={{
+                      initial: { y: "70%", opacity: 0 },
+                      hover: { y: 0, opacity: 1 }
+                    }}
+                    transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+                    className="bg-black-40 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] shadow-2xl"
+                  >
+                    <h3 className="font-llabel font-serif font-bold font-cream mb-4 tracking-tight">
+                      {cat.title}
+                    </h3>
+                    <div className="h-px w-12 bg-white/20 mb-6" />
+                    <div className="space-y-3">
+                      <span className="block font-subtitle uppercase tracking-[0.4em] font-cream font-bold">
+                        Brand Expression
+                      </span>
+                      <p className="font-cream font-content leading-relaxed font-medium">
                         {cat.expression}
                       </p>
                     </div>
@@ -487,37 +508,38 @@ const OurWork = () => {
 
 
         {/* Gallery Note / Advertising Banner */}
-        <div className="mt-20 p-12 md:p-16 bg-[#1A1A1A] rounded-[2rem] px-12 py-16
+        <div className="mt-20 p-12 md:p-16 bg-darkcyan rounded-[2rem] px-8 py-16
                 flex flex-row items-center justify-between 
-                shadow-xl gap-16">
+                shadow-xl gap-6">
 
           {/* Left */}
           <div className="w-2/3">
-            <h3 className="text-4xl font-serif font-bold mb-6 text-white">
+            <h3 className="font-title font-serif font-bold mb-6 text-white">
               Want a look like these?
             </h3>
 
-            <p className="text-lg leading-relaxed max-w-xl text-white">
+            <p className="font-note leading-relaxed max-w-xl text-white">
               Our soft-furnishing design service creates a complete style direction 
               and item list tailored to your space. Buy through us and the fee is fully offset.
             </p>
           </div>
 
           {/* Right */}
-          <div className="w-1/3 flex flex-col items-start gap-6">
-            <div className="text-5xl font-serif font-bold text-[#F5C400]">
+          <div className="w-1/3 flex flex-col items-start gap-8">
+            <div className="font-title font-serif font-bold text-[#F5C400]">
               S$300
             </div>
 
-            <div className="text-xs uppercase tracking-[0.2em] text-white">
+            <div className="font-slabel uppercase tracking-[0.2em] text-white">
               Offset when you order through us
             </div>
 
             <a
-              href="https://t.me/ustaysg"
+              // href="https://t.me/ustaysg"
+              href="https://wa.me/6589904529"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-[#F5C400] text-[#0D1B35] px-10 py-4 rounded-md font-bold uppercase tracking-wide hover:bg-yellow-300 transition-all shadow-lg"
+              className="bg-[#F5C400] text-[#0D1B35] px-6 py-4 rounded-md font-bold uppercase tracking-wide hover:bg-yellow-300 transition-all shadow-lg font-note"
             >
               Get Your Design Plan →
             </a>
@@ -577,8 +599,8 @@ const TermsAndConditions = () => {
     <section id="terms" className="py-24 bg-white border-t border-zinc-100">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center">
-          <div className="text-[10px] md:text-xs tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Terms & Conditions</div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-zinc-900">
+          <div className="text-xs md:text-sm tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Terms & Conditions</div>
+          <h2 className="text-4xl md:text-6xl font-serif font-bold text-zinc-900">
             Our <i className="font-normal italic">commitment</i> to you
           </h2>
         </div>
@@ -590,7 +612,7 @@ const TermsAndConditions = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className={`min-w-0 p-6 md:p-12 rounded-[3rem] border border-zinc-100 ${section.color} shadow-sm`}
+              className={`min-w-0 p-8 md:p-14 rounded-[3rem] border border-zinc-100 ${section.color} shadow-sm`}
             >
               <h3 className="text-sm font-bold mb-8 tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-200/50 pb-4">
                 {section.title}
@@ -598,7 +620,7 @@ const TermsAndConditions = () => {
 
               <ul className="space-y-5">
                 {section.items.map((item, iIdx) => (
-                  <li key={iIdx} className="flex items-start gap-3 text-zinc-600 leading-relaxed">
+                  <li key={iIdx} className="flex items-start gap-3 text-zinc-600 leading-relaxed md:text-lg">
                     <span className="mt-2 w-1.5 h-1.5 rounded-full bg-black shrink-0" />
                     <span>{item}</span>
                   </li>
@@ -608,14 +630,14 @@ const TermsAndConditions = () => {
           ))}
         </div>
 
-        <div className="mt-20 p-12 md:p-16 bg-[#1A1A1A] rounded-[4rem] text-zinc-400 text-sm leading-relaxed shadow-2xl border border-white/5 relative overflow-hidden">
+        <div className="mt-20 p-12 md:p-16 bg-grey rounded-[4rem] text-zinc-400 text-sm leading-relaxed shadow-2xl border border-white/5 relative overflow-hidden">
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mb-32 blur-2xl" />
           <div className="relative z-10">
-            <p className="mb-8 text-xl md:text-2xl text-white font-serif leading-relaxed">
+            <p className="mb-8 text-xl md:text-2xl font-warmorange font-serif leading-relaxed">
               By engaging UStay's services — through Telegram, this website, or any other channel — you agree to these terms. Terms are subject to change; the most current version is always reflected on this page.
             </p>
-            <p className="mb-8 text-xl md:text-2xl text-white font-serif leading-relaxed">
-              For any questions, please reach out via <a href="https://t.me/ustaysg" className="text-white font-bold underline hover:text-zinc-300 transition-colors">Telegram</a> before placing an order. We are always happy to clarify.
+            <p className="mb-8 text-xl md:text-2xl font-warmorange font-serif leading-relaxed">
+              For any questions, please reach out via <a href="https://wa.me/6589904529" className="font-warmorange font-bold underline hover:text-zinc-300 transition-colors">WhatsApp</a> before placing an order. We are always happy to clarify.
             </p>
           </div>
         </div>
@@ -626,7 +648,7 @@ const TermsAndConditions = () => {
 
 const ChatButton = () => (
   <a 
-    href="https://t.me/ustaysg"
+    href="https://wa.me/6589904529"
     target="_blank"
     rel="noopener noreferrer"
     className="fixed bottom-8 right-8 z-[60] bg-[#2481cc] text-white px-6 py-4 rounded-full font-bold shadow-2xl flex items-center gap-3 hover:scale-105 transition-transform group"
@@ -677,8 +699,14 @@ const Footer = () => (
       </div> */}
       
       <div className="pt-4 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-zinc-400">
-        <p className="text-white">© 2026 UStay. All rights reserved.</p>
-        <div className="flex gap-8">
+        <ul id="media">
+          <li><a href="https://t.me/ustaysg" className="hover:text-black transition-colors">Telegram: @ustaysg</a></li>
+          <li>CSS</li>
+          <li>JavaScript</li>
+          <li>PHP</li>
+        </ul> 
+        <p className="font-cream font-slabel">© 2026 UStay. All rights reserved.</p>
+        <div className="flex gap-12 font-cream font-slabel">
           <a href="#terms" className="text-white hover:text-black">Privacy Policy</a>
           <a href="#terms" className="text-white hover:text-black">Terms of Service</a>
         </div>
@@ -695,7 +723,7 @@ const LandingPage = () => {
       <WhyUs />
       <HowWeWork />
       <OurWork />
-      <TermsAndConditions />
+      {/* <TermsAndConditions /> */}
       <ChatButton />
     </div>
   );

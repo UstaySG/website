@@ -51,7 +51,7 @@ const PortfolioPage = () => {
         { title: "French Vintage", quote: 14666, img: "https://qhrenderpicoss.kujiale.com/r/2025/12/01/L3D723S41ENDOQZK4AYUWJ2M6LUFX73VTYY8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKO1N1Y30K?gs.nav.type=auto-site" },
         { title: "Modern Mid-Century", quote: 15666, img: mtra2, link: "https://www.kujiale.com/xiaoguotu/pano/3FOKKPY4MOSN?gs.nav.type=auto-site" },
         { title: "Retro Modern", quote: 15888, img: "https://qhrenderpicoss.kujiale.com/r/2026/01/19/L3D723S41ENDORZHNZIUWLTNILUFX75M3LQ8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKGYXE1XN0?gs.nav.type=auto-site" },
-        { title: "Bauhaus", quote: 17666, img: bauhaus, link:"https://www.kujiale.com/xiaoguotu/pano/3FOKA80D3IKA?gs.nav.type=auto-site"},
+        // { title: "Bauhaus", quote: 17666, img: bauhaus, link:"https://www.kujiale.com/xiaoguotu/pano/3FOKA80D3IKA?gs.nav.type=auto-site"},
       ]
     }
   ];
@@ -63,19 +63,19 @@ const PortfolioPage = () => {
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </Link>
         
-        <div className="mb-16">
+        <div className="mb-10">
           <h1 className="font-title font-serif font-bold mb-6">Selected Works</h1>
           <p className="text-ios-secondary-label font-note`  max-w-7xl">Explore our portfolio of curated spaces, categorized by the unique styles that define our design philosophy.</p>
         </div>
 
         {/* Sticky Sub-nav */}
-        <div className="sticky top-24 z-40 mb-16 py-4 -mx-6 px-6 glass border-y border-black/5">
-          <div className="flex flex-wrap sm:flex-nowrap gap-3 sm:gap-4 justify-center">
+        <div className="sticky top-24 z-40 mb-10 py-1 -mx-6 px-2 glass border-y border-black/5">
+          <div className="flex flex-wrap gap-0 justify-center">
             {styles.map((style) => (
               <a 
                 key={style.name} 
                 href={`#${style.name.toLowerCase().replace(/\s+/g, '-')}`}
-                className="basis-[calc(50%-6px)] sm:basis-0 sm:flex-1 px-4 py-3 sm:px-6 rounded-full text-zinc-400-800 transition-all font-note font-semibold text-center flex items-center justify-center min-h-[44px]"
+                className="px-2 py-0 rounded-full text-zinc-400-800 transition-all font-content font-semibold text-center flex items-center justify-center min-h-[30px]"
               >
                 {style.name}
               </a>
@@ -94,6 +94,7 @@ const PortfolioPage = () => {
               <div className="grid grid-1-3 gap-8">
                 {style.projects.map((project, pIdx) => (
                   <Link 
+                    key={pIdx}
                     target="_blank"
                     rel="noopener noreferrer"
                     to={project.link}>
@@ -115,9 +116,7 @@ const PortfolioPage = () => {
                       </div>
                       <h3 className="font-note font-bold mb-1">{project.title}</h3>
                       <p className="mb-4 font-subtitle font-bold mb-1 text-zinc-600">
-                        S$ {project.quote} &nbsp;  <a href={project.link} className="text-zinc-400-800 font-bold transition-colors">
-                          View Project →
-                      </a></p>
+                        S$ {project.quote} &nbsp; View Project → </p>
                     </motion.div>
                   </Link>
                   

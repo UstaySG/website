@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageCircle, Instagram, Facebook, Mail, Menu, X, Send } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
@@ -9,6 +10,7 @@ import serenity from "./portfolio/serenity.jfif";
 import urban from "./portfolio/urban.jfif";
 import luxury from "./portfolio/luxury.jpg";
 import character from "./portfolio/character.jpg";
+
 
 const LinkedInIcon = ({ size = 24 }: { size?: number }) => (
   <svg
@@ -43,6 +45,8 @@ const Navbar = () => {
     // { name: 'T&C', href: isHome ? '#terms' : '/#terms' },
   ];
 
+  const quoteHref = isHome ? '#paths' : '/#paths';
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-6'}`}>
       <div className="max-w-7xl mx-auto px-6">
@@ -64,7 +68,7 @@ const Navbar = () => {
             ))}
 
             <a
-              href="#paths"
+              href={quoteHref}
               className="bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:opacity-80 transition-opacity"
             >
               GET A QUOTE
@@ -91,7 +95,7 @@ const Navbar = () => {
           ))}
 
           <a 
-            href="#paths"
+            href={quoteHref}
             className="bg-black text-white w-full py-4 rounded-2xl font-medium mt-2 text-center"
           >
             GET A QUOTE
@@ -881,17 +885,53 @@ const ScrollToTop = () => {
   return null;
 };
 
+
+const ScrollToHashElement = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (!location.hash) return;
+
+    const id = location.hash.replace('#', '');
+
+    const scrollToElement = () => {
+      const element = document.getElementById(id);
+      if (element) {
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+        });
+      }
+    };
+
+    // 等页面内容先渲染出来
+    setTimeout(scrollToElement, 100);
+  }, [location]);
+
+  return null;
+};
+
 export default function App() {
-  const [showSplash, setShowSplash] = React.useState(true);
+  const [showSplash, setShowSplash] = React.useState(() => {
+    return sessionStorage.getItem('ustay-splash-shown') !== 'true';
+  });
+
+  const handleSplashComplete = () => {
+    sessionStorage.setItem('ustay-splash-shown', 'true');
+    setShowSplash(false);
+  };
 
   return (
     <Router>
       <AnimatePresence mode="wait">
         {showSplash && (
-          <SplashScreen onComplete={() => setShowSplash(false)} />
+          <SplashScreen onComplete={handleSplashComplete} />
         )}
       </AnimatePresence>
+
       <ScrollToTop />
+      <ScrollToHashElement />
+      
       <div className="min-h-screen">
         <Navbar />
         <Routes>

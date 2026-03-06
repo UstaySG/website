@@ -152,24 +152,24 @@ const Hero = () => (
         className="relative w-full max-w-2xl mb-16 flex flex-col items-center animate-seesaw origin-center"
       >
         {/* Beam */}
-        <div className="relative w-full h-1 bg-gradient-to-r from-transparent via-zinc-700 to-transparent mb-2">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-zinc-800 border border-zinc-700 rounded-full z-20" />
+        <div className="relative w-full h-1 bg-gradient-to-r from-transparent via-darkblue to-transparent mb-2">
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-zinc-800 rounded-full z-20" />
         </div>
         
         <div className="flex justify-between w-full px-0 md:px-12">
           {/* Left Pan */}
           <div className="flex flex-col items-center">
             <div className="w-px h-16 bg-zinc-800" />
-            <div className="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900-50 backdrop-blur-sm">
-              <span className="font-llabel font-serif italic font-cream font-bold">beautifully</span>
+            <div className="px-6 py-3 rounded-full bg-darkblue-50">
+              <span className="font-xllabel font-serif italic">beautifully</span>
             </div>
           </div>
 
           {/* Right Pan */}
           <div className="flex flex-col items-center">
             <div className="w-px h-16 bg-zinc-800" />
-            <div className="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900-50 backdrop-blur-sm">
-              <span className="font-llabel font-serif italic font-cream font-bold">affordably</span>
+            <div className="px-6 py-3 rounded-full bg-yellow-50">
+              <span className="font-xllabel font-serif italic">affordably</span>
             </div>
           </div>
         </div>
@@ -178,7 +178,7 @@ const Hero = () => (
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-black -z-10" />
         
         {/* Scale And */}
-        <div className="mt-8 font-slabel tracking-[0.3em] uppercase font-bold font-darkbrown">
+        <div className="mt-8 font-note tracking-[0.3em] uppercase font-bold font-darkbrown">
           equally important
         </div>
       </motion.div>
@@ -200,10 +200,10 @@ const Hero = () => (
         transition={{ delay: 0.4 }}
         className="flex flex-row gap-24 mb-20 justify-center"
       >
-        <a href="#paths" className="white-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-slabel">
+        <a href="#paths" className="white-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-content">
           Start Your Journey
         </a>
-        <a href="#gallery" className="black-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-slabel">
+        <a href="#gallery" className="black-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-content">
           See Our Work
         </a>
       </motion.div>
@@ -793,7 +793,6 @@ const ChatButton = () => (
   >
     <MessageCircle size={20}/>
      {/* className="w-2 h-2 bg-white animate-pulse" /> */}
-    CHAT WITH US
   </a>
 );
 
@@ -837,21 +836,21 @@ const Footer = () => (
         </div>
       </div> */}
       
-      <div className="pt-4 flex flex-col md:flex-row justify-between items-center gap-6 text-sm text-zinc-400">
-        <ul id="media" className="flex gap-8">
-          <li><a href="https://t.me/ustaysg" target="_blank" rel="noopener noreferrer"><Send size={24}/></a></li>
-          <li><a href="mailto:clientservice@ustaysingapore.com"><Mail size={24}/></a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61552263188169" target="_blank" rel="noopener noreferrer"><Facebook size={24}/></a></li>
-          <li><a href="https://www.instagram.com/ustaysg/" target="_blank" rel="noopener noreferrer"><Instagram size={24}/></a></li>
-          <li><a href="https://x.com/UstaySG" target="_blank" rel="noopener noreferrer"><X size={24}/></a></li>
-          <li><a href="https://www.linkedin.com/in/ustay-singapore-0a42a53b4/" target="_blank" rel="noopener noreferrer"><LinkedInIcon/></a></li>
-        </ul> 
-        <p className="font-cream font-slabel">© 2026 UStay. All rights reserved.</p>
-        <div className="flex gap-12 font-cream font-slabel">
-          {/* <a href="#terms" className="text-white hover:text-black">Privacy Policy</a> */}
-          {/* <a href="#terms" className="text-white hover:text-black">Terms of Service</a> */}
-          <PrivacyModalTrigger/>
-          <TermsModalTrigger/>
+      <div className="pt-4 flex flex-col items-center text-center gap-4 text-zinc-400">
+        <ul id="media" className="flex flex-wrap justify-center gap-8">
+          <li><a href="https://t.me/ustaysg" target="_blank" rel="noopener noreferrer"><Send size={24} /></a></li>
+          <li><a href="mailto:clientservice@ustaysingapore.com"><Mail size={24} /></a></li>
+          <li><a href="https://www.facebook.com/profile.php?id=61552263188169" target="_blank" rel="noopener noreferrer"><Facebook size={24} /></a></li>
+          <li><a href="https://www.instagram.com/ustaysg/" target="_blank" rel="noopener noreferrer"><Instagram size={24} /></a></li>
+          <li><a href="https://x.com/UstaySG" target="_blank" rel="noopener noreferrer"><X size={24} /></a></li>
+          <li><a href="https://www.linkedin.com/in/ustay-singapore-0a42a53b4/" target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a></li>
+        </ul>
+
+        <p className="font-cream font-subtitle">© 2026 UStay. All rights reserved.</p>
+
+        <div className="flex flex-wrap justify-center gap-8 font-cream font-subtitle">
+          <PrivacyModalTrigger />
+          <TermsModalTrigger />
         </div>
       </div>
     {/* </div> */}

@@ -20,6 +20,8 @@
 @layer utilities {
   ul#media li {
     display:inline;
+    justify-content: center;
+    text-align: center;
   }
   ul#media li:hover{
     color: #f6f1e8;
@@ -182,6 +184,16 @@
     }
   }
 
+  .font-xllabel{
+    font-size: 24px;
+  }
+
+  @media (min-width: 700px) {   /* change breakpoint as you like */
+    .font-xllabel{
+      font-size: 44px;
+    }
+  }
+
   .font-llabel{
     font-size: 24px;
   }
@@ -303,8 +315,30 @@
     background-color: #f6f1e8;
   }
 
+  .bg-darkblue-50{
+    background-color: rgba(26, 58, 107, 0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.22);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+    color: #FFF8EE;
+    font-weight: 800;
+  }
+
+  .bg-yellow-50{
+    background-color: rgba(245, 196, 0, 0.55);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
+    color: #1D1D1F;
+    font-weight: 800;
+  }
+
   .bg-darkcyan{
     background-color: #1f3a34;
+  }
+
+  .bg-darkcyan-50{
+    background-color: rgba(31, 58, 52, 0.5);
   }
 
   .bg-brown{
@@ -320,12 +354,25 @@
 
   }
 
+  .bg-zinc-800{
+    background-color: #27272a;
+  }
+
   .bg-zinc-900-50{
     background-color: rgba(24, 24, 27, 0.4);
   }
 
   .bg-greyblue-50{
     background-color: rgba(94, 115, 105, 0.4);
+  }
+
+  .via-darkblue{
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      #1A3A6B 50%,
+      transparent 100%
+    );
   }
 
   .white-button{

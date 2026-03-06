@@ -53,7 +53,7 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         {/* Row 1: UStay */}
         <motion.h1 
           variants={itemVariants}
-          className="font-title font-serif font-bold tracking-tighter leading-none text-[#E5D5C0] mb-8 md:mb-12"
+          className="text-6xl md:text-8xl font-serif font-bold tracking-tighter leading-none text-[#E5D5C0] mb-8 md:mb-12"
         >
           UStay
         </motion.h1>
@@ -61,25 +61,25 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
         {/* Row 2: SINGAPORE'S FUTURE CONCIERGE */}
         <motion.p 
           variants={itemVariants}
-          className="font-subtitle md:text-xs tracking-[0.6em] uppercase font-bold text-[#8E8E93]"
+          className="text-[10px] md:text-xs tracking-[0.6em] uppercase font-bold text-[#8E8E93]"
         >
-          SINGAPORE'S FURNITURE CONCIERGE
+          SINGAPORE'S FUTURE CONCIERGE
         </motion.p>
 
         {/* Row 3: Furnish your home */}
         <motion.h2 
           variants={itemVariants}
-          className="font-lnote md:text-5xl font-serif italic text-white"
+          className="text-3xl md:text-5xl font-serif italic text-white"
         >
           Furnish your home
         </motion.h2>
 
-        {/* Row 4: beautifully, affordably */}
+        {/* Row 4: beautifully, cost-effectively */}
         <motion.p 
           variants={itemVariants}
-          className="font-llabel font-light tracking-wide text-[#A7A7A7]"
+          className="text-lg md:text-xl font-light tracking-wide text-[#A7A7A7]"
         >
-          beautifully, affordably
+          beautifully, cost-effectively
         </motion.p>
 
         {/* Row 5: Factory-direct · Design to Delivery */}
@@ -87,9 +87,9 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
           variants={itemVariants}
           className="flex items-center gap-4 md:gap-8 py-4 border-y border-white/5 w-full justify-center text-[#C5A059]"
         >
-          <span className="font-note font-serif font-bold">Factory-direct</span>
+          <span className="text-xl md:text-3xl font-serif font-bold">Factory-direct</span>
           <span className="text-zinc-700 text-2xl font-light">·</span>
-          <span className="font-note font-serif font-bold">Design to Delivery</span>
+          <span className="text-xl md:text-3xl font-serif font-bold">Design to Delivery</span>
         </motion.div>
 
         {/* Row 6: Stats Grid */}
@@ -104,8 +104,8 @@ const SplashScreen: React.FC<SplashScreenProps> = ({ onComplete }) => {
               variants={itemVariants}
               className="flex flex-col items-center gap-2 flex-1"
             >
-              <span className="font-lnote font-serif font-bold text-[#D1D1D1]">{item.num}</span>
-              <span className="font-note tracking-[0.1em] md:tracking-[0.2em] uppercase font-bold text-[#636366] text-center">
+              <span className="text-2xl md:text-4xl font-serif font-bold text-[#D1D1D1]">{item.num}</span>
+              <span className="text-[8px] md:text-[10px] tracking-[0.1em] md:tracking-[0.2em] uppercase font-bold text-[#636366] text-center">
                 {item.label}
               </span>
             </motion.div>

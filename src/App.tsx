@@ -39,8 +39,8 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'WHY US', href: isHome ? '#why' : '/#why' },
-    { name: 'OUR WORK', href: isHome ? '#gallery' : '/portfolio' },
-    // { name: 'T&C', href: isHome ? '#terms' : '/#terms' },
+    { name: 'OUR WORK', href: isHome ? '#gallery' : '/#gallery' },
+    { name: 'T&C', href: isHome ? '#terms' : '/#terms' },
   ];
 
   return (
@@ -51,19 +51,13 @@ const Navbar = () => {
             <span className="font-serif font-bold text-xl tracking-tight">UStay</span>
           </Link>
 
-          {/* Desktop */}
           <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
-              <a
-                key={item.name}
-                href={item.href}
-                className="text-sm font-medium text-ios-secondary-label hover:text-black transition-colors"
-              >
+              <a key={item.name} href={item.href} className="text-sm font-medium text-ios-secondary-label hover:text-black transition-colors">
                 {item.name}
               </a>
             ))}
-
-            <a
+            <a 
               href="#paths"
               className="bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:opacity-80 transition-opacity"
             >
@@ -89,7 +83,6 @@ const Navbar = () => {
               {item.name}
             </a>
           ))}
-
           <a 
             href="#paths"
             className="bg-black text-white w-full py-4 rounded-2xl font-medium mt-2 text-center"
@@ -107,8 +100,7 @@ const Hero = () => (
     {/* Background Image */}
     <div className="absolute inset-0 z-0 opacity-20">
       <img 
-        // src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000" 
-        src={hero}
+        src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000" 
         alt="Luxury Interior" 
         className="w-full h-full object-cover"
         referrerPolicy="no-referrer"
@@ -160,16 +152,16 @@ const Hero = () => (
           {/* Left Pan */}
           <div className="flex flex-col items-center">
             <div className="w-px h-16 bg-zinc-800" />
-            <div className="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900-50 backdrop-blur-sm">
-              <span className="font-llabel font-serif italic font-cream font-bold">beautifully</span>
+            <div className="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm">
+              <span className="font-llabel font-serif italic font-darkbrown">beautifully</span>
             </div>
           </div>
 
           {/* Right Pan */}
           <div className="flex flex-col items-center">
             <div className="w-px h-16 bg-zinc-800" />
-            <div className="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900-50 backdrop-blur-sm">
-              <span className="font-llabel font-serif italic font-cream font-bold">affordably</span>
+            <div className="px-6 py-3 rounded-full border border-zinc-800 bg-zinc-900/50 backdrop-blur-sm">
+              <span className="font-llabel font-serif italic font-darkbrown">affordably</span>
             </div>
           </div>
         </div>
@@ -188,7 +180,7 @@ const Hero = () => (
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.3 }}
-        className="text-ios-secondary-label max-w-2xl mb-12 font-note leading-relaxed text-zinc-600"
+        className="text-ios-secondary-label max-w-2xl mb-12 font-note leading-relaxed"
       >
         Factory-direct furniture from trusted manufacturers — with full design guidance, ordering, and delivery handled for you.
       </motion.p>
@@ -216,16 +208,16 @@ const Hero = () => (
         className="flex flex-wrap justify-center gap-8-96 border-t border-white/5 pt-12 w-full"
       >
         <div className="flex flex-col items-center gap-1">
-          <div className="font-lnote font-serif font-bold font-warmgrey">↓50%</div>
-          <div className="font-note uppercase tracking-widest text-zinc-500">vs Local Showroom</div>
+          <div className="font-llabel font-serif font-bold font-warmgrey">↓50%</div>
+          <div className="font-slabel uppercase tracking-widest text-zinc-500">vs Local Showroom</div>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="font-lnote font-serif font-bold font-warmgrey">100%</div>
-          <div className="font-note uppercase tracking-widest text-zinc-500">Managed for You</div>
+          <div className="font-llabel font-serif font-bold font-warmgrey">100%</div>
+          <div className="font-slabel uppercase tracking-widest text-zinc-500">Managed for You</div>
         </div>
         <div className="flex flex-col items-center gap-1">
-          <div className="font-lnote font-serif font-bold font-warmgrey">0</div>
-          <div className="font-note uppercase tracking-widest text-zinc-500">Overseas Hassle</div>
+          <div className="font-llabel font-serif font-bold font-warmgrey">0</div>
+          <div className="font-slabel uppercase tracking-widest text-zinc-500">Overseas Hassle</div>
         </div>
       </motion.div>
     </div>
@@ -459,7 +451,7 @@ const OurWork = () => {
           {filteredCategories.map((cat, idx) => (
             <Link 
               key={idx}
-              // to={`/portfolio#${cat.id}`}
+              to={`/portfolio#${cat.id}`}
               className="block"
             >
               <motion.div 

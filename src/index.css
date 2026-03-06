@@ -152,16 +152,6 @@
     }
   }
 
-  .font-lnote{
-    font-size: 28px;
-  }
-
-  @media (min-width: 700px) {   /* change breakpoint as you like */
-    .font-lnote{
-      font-size: 40px;
-    }
-  }
-
   .font-note{
     font-size: 18px;
   }
@@ -263,15 +253,7 @@
     color: #f6f1e8;
   }
 
-  .font-gold{
-    color: #c5a059;
-  }
-
-  .font-brown{
-    color: #c47a5a;
-  }
-
-  .bg-warmblack {
+    .bg-warmblack {
     background-color: #1c1b19;
   }
 
@@ -318,14 +300,6 @@
   .bg-black-40{
     background-color: rgba(0, 0, 0, 0.4)
 
-  }
-
-  .bg-zinc-900-50{
-    background-color: rgba(24, 24, 27, 0.4);
-  }
-
-  .bg-greyblue-50{
-    background-color: rgba(94, 115, 105, 0.4);
   }
 
   .white-button{

@@ -4,6 +4,11 @@ import { MessageCircle, Instagram, Facebook, Mail, Menu, X, Send } from 'lucide-
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import SplashScreen from './components/SplashScreen';
 import PortfolioPage from './pages/PortfolioPage';
+import hero from "./portfolio/hero.png";
+import serenity from "./portfolio/serenity.jfif";
+import urban from "./portfolio/urban.jfif";
+import luxury from "./portfolio/luxury.jpg";
+import character from "./portfolio/character.jpg";
 
 const LinkedInIcon = ({ size = 24 }: { size?: number }) => (
   <svg
@@ -103,7 +108,7 @@ const Hero = () => (
     <div className="absolute inset-0 z-0 opacity-20">
       <img 
         // src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?auto=format&fit=crop&q=80&w=2000" 
-        src="/src/portfolio/hero.png"
+        src={hero}
         alt="Luxury Interior" 
         className="w-full h-full object-cover"
         referrerPolicy="no-referrer"
@@ -392,28 +397,28 @@ const OurWork = () => {
     { 
       title: "Serenity Collection", 
       expression: "Soft tones, natural textures, and restrained elegance. Designed for calm, breathable living.",
-      img: "/src/portfolio/serenity.jfif",
+      img: serenity,
       style: "serenity",
       id: "serenity-collection"
     },
     { 
       title: "Urban Signature", 
       expression: "Structured lines, refined contrast, and metropolitan confidence. Bold yet balanced.",
-      img: "/src/portfolio/urban.jfif",
+      img: urban,
       style: "urban",
       id: "urban-signature"
     },
     { 
       title: "Elevated Luxury", 
       expression: "Premium materials, layered details, and timeless sophistication. Spaces that reflect status and taste.",
-      img: "/src/portfolio/luxury.jpg",
+      img: luxury,
       style: "luxury",
       id: "elevated-luxury"
     },
     { 
       title: "Character & Revival", 
       expression: "Expressive palettes, nostalgic elements, and curated personality. Design with emotion and individuality.",
-      img: "/src/portfolio/character.jpg",
+      img: character,
       style: "revival",
       id: "character-&-revival"
     }

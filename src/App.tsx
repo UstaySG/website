@@ -459,7 +459,7 @@ const OurWork = () => {
           {filteredCategories.map((cat, idx) => (
             <Link 
               key={idx}
-              // to={`/portfolio#${cat.id}`}
+              to={`/portfolio#${cat.id}`}
               className="block"
             >
               <motion.div 

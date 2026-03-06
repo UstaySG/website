@@ -242,6 +242,13 @@
   .text-zinc-600{
     color: #52525b
   }
+
+  .text-zinc-400-800{
+    color: #a1a1aa
+  }
+  .text-zinc-400-800:hover{
+    color: #27272a
+  }
   
   .text-zinc-800{
     color: #27272a

@@ -2,43 +2,56 @@ import React from 'react';
 import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import song from "../portfolio/song/pic1.jpg";
+import wcream from "../portfolio/wcream/pic1.jpg";
+import fcream from "../portfolio/fcream/pic1.jpg";
+import italian from "../portfolio/italian/pic1.jpg";
+import bauhaus from "../portfolio/bauhaus/pic1.jpg";
+import mtra2 from "../portfolio/mtra2/pic1.jpg";
+
+
 
 const PortfolioPage = () => {
   const styles = [
     {
-      name: "Modern Minimalist",
-      description: "Clean lines, neutral palettes, and functional elegance.",
+      name: "Serenity Collection",
+      description: "Soft tones, natural textures, and restrained elegance. Designed for calm, breathable living.",
       projects: [
-        { title: "Zen Living", img: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=800" },
-        { title: "Glass House", img: "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=800" },
-        { title: "Monochrome Loft", img: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=800" }
+        { title: "Natural Cream", img: wcream, quote: 12666, link: "https://www.kujiale.com/xiaoguotu/pano/3FOKGYXBHMBA?gs.nav.type=auto-site" },
+        { title: "Song-Inspired Aesthetic", img: song, quote: 12888, link: "https://www.kujiale.com/xiaoguotu/pano/3FOKGYX4RP81?gs.nav.type=auto-site" },
+        { title: "French Cream", img: fcream, quote: 13888, link: "https://www.kujiale.com/xiaoguotu/pano/3FOKGYYEYX58?gs.nav.type=auto-site" },
+        { title: "Japandi", quote: 13666, img: "https://qhrenderpicoss.kujiale.com/r/2025/12/01/L3D723S41ENDOQZPFUYUWLR4ELUFX7CMUVY8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKGYX4RP81?gs.nav.type=auto-site" },
+        { title: "Italian Cream", img: "https://qhrenderpicoss.kujiale.com/r/2025/12/01/L3D723S41ENDOQZOFVAUWITYOLUFX7CIM7I8.jpg", quote: 15666, link: "https://www.kujiale.com/xiaoguotu/pano/3FOKO1VVDNHE?gs.nav.type=auto-site" }
       ]
     },
     {
-      name: "Classic Elegance",
+      name: "Urban Signature",
       description: "Timeless sophistication with a touch of luxury.",
       projects: [
-        { title: "Royal Suite", img: "https://images.unsplash.com/photo-1617806118233-18e16737a2c1?auto=format&fit=crop&q=80&w=800" },
-        { title: "Heritage Manor", img: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&q=80&w=800" },
-        { title: "Velvet Lounge", img: "https://images.unsplash.com/photo-1600121848594-d8644e57abab?auto=format&fit=crop&q=80&w=800" }
+        { title: "Italian Modern", img: "https://qhrenderpicoss.kujiale.com/r/2026/01/19/L3D723S41ENDORZGONAUWKAM6LUFX75JYQY8.jpg", quote:12666, link: "https://www.kujiale.com/xiaoguotu/pano/3FOKGYVCMOSJ?gs.nav.type=auto-site" },
+        { title: "Warm Modern", quote: 13666, img: "https://qhrenderpicoss.kujiale.com/r/2026/01/19/L3D723S41ENDORZGGMAUWLVCOLUFX75PLQY8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKGYYFWP11?gs.nav.type=auto-site" },
+        { title: "Dark Modern", quote:17666, img: "https://qhrenderpicoss.kujiale.com/r/2025/12/01/L3D723S41ENDOQZPN2AUWIK5ULUFX7CL3UI8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKO1WP8CRD?gs.nav.type=auto-site" }
       ]
     },
     {
-      name: "Urban Sanctuary",
-      description: "Vibrant city living balanced with serene interiors.",
+      name: "Elevated Luxury",
+      description: "Premium materials, layered details, and timeless sophistication. Spaces that reflect status and taste.",
       projects: [
-        { title: "Skyline Penthouse", img: "https://images.unsplash.com/photo-1616594111705-3f513baf480c?auto=format&fit=crop&q=80&w=800" },
-        { title: "Industrial Chic", img: "https://images.unsplash.com/photo-1600585154526-990dcea4db0d?auto=format&fit=crop&q=80&w=800" },
-        { title: "Concrete Garden", img: "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&q=80&w=800" }
+        { title: "Italian Luxury", quote: 13888, img: "https://qhrenderpicoss.kujiale.com/r/2025/01/14/L3D763S41ENDPKNMDRYUWII4QLUFX6VH5ZY8_3840x1644.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKO1X0DJJL?gs.nav.type=auto-site" },
+        { title: "Modren Luxury", quote: 14888, img: "https://qhrenderpicoss.kujiale.com/r/2025/11/28/L3D723S41ENDOQ3HRNQUWLR4ELUFX7PFZXA8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKO1VJLW99?gs.nav.type=auto-site" },
+        { title: "Warm Luxury", quote: 15888, img: "https://qhrenderpicoss.kujiale.com/r/2025/12/01/L3D723S41ENDOQZNFEQUWIUIALUFX7BSIBA8.jpg", link:"https://www.kujiale.com/xiaoguotu/pano/3FOKO1OL5YYV?gs.nav.type=auto-site" },
+        { title: "Light Luxury", quote: 16888, img: "https://qhrenderpicoss.kujiale.com/r/2025/12/01/L3D723S41ENDOQZOWFYUWIMU4LUFX7CLQ2Q8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKO1USEHXV?gs.nav.type=auto-site" },
+        
       ]
     },
     {
-      name: "Nordic Serenity",
-      description: "Warm woods, soft textiles, and natural light.",
+      name: "Character & Revival",
+      description: "Expressive palettes, nostalgic elements, and curated personality. Design with emotion and individuality.",
       projects: [
-        { title: "Fjord Retreat", img: "https://images.unsplash.com/photo-1618219908412-a29a1bb7b86e?auto=format&fit=crop&q=80&w=800" },
-        { title: "Pine Studio", img: "https://images.unsplash.com/photo-1598928506311-c55ded91a20c?auto=format&fit=crop&q=80&w=800" },
-        { title: "Hygge Home", img: "https://images.unsplash.com/photo-1513519247388-44735da42c17?auto=format&fit=crop&q=80&w=800" }
+        { title: "French Vintage", quote: 14666, img: "https://qhrenderpicoss.kujiale.com/r/2025/12/01/L3D723S41ENDOQZK4AYUWJ2M6LUFX73VTYY8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKO1N1Y30K?gs.nav.type=auto-site" },
+        { title: "Modern Mid-Century", quote: 15666, img: mtra2, link: "https://www.kujiale.com/xiaoguotu/pano/3FOKKPY4MOSN?gs.nav.type=auto-site" },
+        { title: "Retro Modern", quote: 15888, img: "https://qhrenderpicoss.kujiale.com/r/2026/01/19/L3D723S41ENDORZHNZIUWLTNILUFX75M3LQ8.jpg", link: "https://www.kujiale.com/xiaoguotu/pano/3FOKGYXE1XN0?gs.nav.type=auto-site" },
+        { title: "Bauhaus", quote: 17666, img: bauhaus, link:"https://www.kujiale.com/xiaoguotu/pano/3FOKA80D3IKA?gs.nav.type=auto-site"},
       ]
     }
   ];
@@ -46,13 +59,13 @@ const PortfolioPage = () => {
   return (
     <div className="min-h-screen bg-white pt-32 pb-24">
       <div className="max-w-7xl mx-auto px-6">
-        <Link to="/" className="inline-flex items-center gap-2 text-sm font-bold mb-12 hover:opacity-70 transition-opacity">
+        <Link to="/" className="inline-flex items-center gap-2 text-slabel font-bold mb-12 hover:opacity-70 transition-opacity">
           <ArrowLeft className="w-4 h-4" /> Back to Home
         </Link>
         
         <div className="mb-16">
-          <h1 className="text-5xl md:text-7xl font-serif font-bold mb-6">Selected Works</h1>
-          <p className="text-ios-secondary-label text-xl max-w-2xl">Explore our portfolio of curated spaces, categorized by the unique styles that define our design philosophy.</p>
+          <h1 className="font-title font-serif font-bold mb-6">Selected Works</h1>
+          <p className="text-ios-secondary-label font-note`  max-w-7xl">Explore our portfolio of curated spaces, categorized by the unique styles that define our design philosophy.</p>
         </div>
 
         {/* Sticky Sub-nav */}
@@ -62,7 +75,7 @@ const PortfolioPage = () => {
               <a 
                 key={style.name} 
                 href={`#${style.name.toLowerCase().replace(/\s+/g, '-')}`}
-                className="basis-[calc(50%-6px)] sm:basis-0 sm:flex-1 px-4 py-3 sm:px-6 rounded-full bg-black/5 hover:bg-black hover:text-white transition-all text-xs sm:text-sm font-semibold text-center flex items-center justify-center min-h-[44px]"
+                className="basis-[calc(50%-6px)] sm:basis-0 sm:flex-1 px-4 py-3 sm:px-6 rounded-full text-zinc-400-800 transition-all font-note font-semibold text-center flex items-center justify-center min-h-[44px]"
               >
                 {style.name}
               </a>
@@ -74,33 +87,40 @@ const PortfolioPage = () => {
           {styles.map((style, idx) => (
             <section key={idx} id={style.name.toLowerCase().replace(/\s+/g, '-')} className="scroll-mt-48">
               <div className="mb-12">
-                <h2 className="text-3xl md:text-4xl font-serif font-bold mb-4">{style.name}</h2>
-                <p className="text-ios-secondary-label max-w-xl">{style.description}</p>
+                <h2 className="font-lnote font-serif font-bold mb-4">{style.name}</h2>
+                <p className="text-ios-secondary-label font-content max-w-7xl">{style.description}</p>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="grid grid-1-3 gap-8">
                 {style.projects.map((project, pIdx) => (
-                  <motion.div 
-                    key={pIdx}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: pIdx * 0.1 }}
-                    className="group cursor-pointer"
-                  >
-                    <div className="aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 ios-shadow">
-                      <img 
-                        src={project.img} 
-                        alt={project.title} 
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                        referrerPolicy="no-referrer"
-                      />
-                    </div>
-                    <h3 className="text-xl font-bold mb-1">{project.title}</h3>
-                    <p className="text-sm text-ios-secondary-label flex items-center gap-2 group-hover:text-black transition-colors">
-                      View Project <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                    </p>
-                  </motion.div>
+                  <Link 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    to={project.link}>
+                    <motion.div 
+                      key={pIdx}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: pIdx * 0.1 }}
+                      className="group cursor-pointer"
+                    >
+                      <div className="aspect-[3/4] rounded-[2rem] overflow-hidden mb-6 ios-shadow">
+                        <img 
+                          src={project.img} 
+                          alt={project.title} 
+                          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                          referrerPolicy="no-referrer"
+                        />
+                      </div>
+                      <h3 className="font-note font-bold mb-1">{project.title}</h3>
+                      <p className="mb-4 font-subtitle font-bold mb-1 text-zinc-600">
+                        S$ {project.quote} &nbsp;  <a href={project.link} className="text-zinc-400-800 font-bold transition-colors">
+                          View Project →
+                      </a></p>
+                    </motion.div>
+                  </Link>
+                  
                 ))}
               </div>
             </section>

@@ -8,6 +8,7 @@ import PortfolioPage from './pages/PortfolioPage.tsx';
 import ProcessPage from './pages/ProcessPage.tsx';
 import AboutPage from './pages/AboutPage.tsx';
 import FAQPage from './pages/FAQPage.tsx';
+import FooterPolicyBlock from './pages/PolicyPage.tsx'
 // import hero from "./portfolio/hero.png";
 import serenity from "./portfolio/serenity.jfif";
 import urban from "./portfolio/urban.jfif";
@@ -581,23 +582,6 @@ const OurWork = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                 
                 <div className="absolute inset-x-6 bottom-6 md:inset-x-10 md:bottom-10">
-                  {/* <motion.div 
-                    variants={{
-                      initial: { y: "65%" },
-                      hover: { y: 0 }
-                    }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="bg-black-40 backdrop-blur-xl p-8 md:p-10 rounded-[2.5rem] shadow-2xl"
-                  >
-                    <h3 className="font-llabel font-serif font-bold font-cream mb-4 tracking-tight">{cat.title}</h3>
-                    <div className="h-px w-12 bg-white/20 mb-6" />
-                    <div className="space-y-3">
-                      <span className="block font-subtitle uppercase tracking-[0.4em] font-cream font-bold">Brand Expression</span>
-                      <p className="font-cream font-content leading-relaxed font-medium">
-                        {cat.expression}
-                      </p>
-                    </div>
-                  </motion.div> */}
                   <motion.div
                     variants={{
                       initial: { y: "70%", opacity: 0 },
@@ -654,7 +638,6 @@ const OurWork = () => {
             </div>
 
             <a
-              // href="https://t.me/ustaysg"
               href="https://wa.me/6589904529"
               target="_blank"
               rel="noopener noreferrer"
@@ -1022,12 +1005,12 @@ const socialMedia = [
     label: "X",
     external: true,
   },
-  {
-    href: "https://www.linkedin.com/in/ustay-singapore-0a42a53b4/",
-    icon: LinkedInIcon,
-    label: "LinkedIn",
-    external: true,
-  },
+  // {
+  //   href: "https://www.linkedin.com/in/ustay-singapore-0a42a53b4/",
+  //   icon: LinkedInIcon,
+  //   label: "LinkedIn",
+  //   external: true,
+  // },
 ];
 
 const Footer = () => (
@@ -1062,8 +1045,9 @@ const Footer = () => (
                 FAQ
               </a>
             </li>
-            <li className="text-zinc-400-300 transition-colors flex gap-2">
+            <li className="text-zinc-400-300 transition-colors gap-2">
               Contact Us
+              <div className="flex ml-4 gap-2">
                 {socialMedia.map(({ href, icon: Icon, label, external }) => (
                   <a
                     key={label}
@@ -1076,6 +1060,7 @@ const Footer = () => (
                     <Icon className="w-5 h-5" />
                   </a>
                 ))}
+              </div>
             </li>
           </ul>
           
@@ -1085,16 +1070,8 @@ const Footer = () => (
           <h4 className="font-bold mb-4 font-cream uppercase tracking-widest font-subtitle">
             Legal
           </h4>
-          <ul className="space-y-4 text-zinc-300">
-            <li>
-              <PrivacyModalTrigger />
-            </li>
-            <li>
-              <TermsModalTrigger />
-            </li>
-            <li className="text-zinc-400">Singapore</li>
-          </ul>
-          
+          <FooterPolicyBlock />
+          <div className="text-zinc-400 font-slabel">Singapore</div>
          
         </div>
       </div>
@@ -1193,127 +1170,3 @@ export default function App() {
 
   
 }
-
-
-export function PrivacyModalTrigger() {
-  const [open, setOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    if (open) document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
-
-  return (
-    <>
-      {/* Footer item */}
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="text-zinc-400-300 transition-colors font-content"
-      >
-        Privacy Policy
-      </button>
-
-      {open && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center px-4" role="dialog" aria-modal="true">
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
-
-          {/* Panel */}
-          <div className="relative w-full max-w-6xl rounded-[2.5rem] bg-white shadow-2xl border border-zinc-200 overflow-hidden">
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 md:px-8 py-4 border-b border-zinc-100">
-              <div className="text-sm tracking-[0.3em] uppercase font-bold text-zinc-400">
-                Privacy Policy
-              </div>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center
-                           text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all"
-                aria-label="Close"
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            {/* Scroll area */}
-            <div className="max-h-[80vh] overflow-y-auto">
-              <PrivacyPolicy />
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-
-
-export function TermsModalTrigger() {
-  const [open, setOpen] = React.useState(false);
-
-  React.useEffect(() => {
-    const onKeyDown = (e) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    if (open) document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = "";
-      window.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
-
-  return (
-    <>
-      {/* Footer link */}
-      <button
-        type="button"
-        onClick={() => setOpen(true)}
-        className="text-zinc-400-300 transition-colors font-content"
-      >
-        Terms of Service
-      </button>
-
-      {/* Modal */}
-      {open && (
-        <div className="fixed inset-0 z-[999] flex items-center justify-center px-4" role="dialog" aria-modal="true">
-          {/* Backdrop */}
-          <div className="absolute inset-0 bg-black/50" onClick={() => setOpen(false)} />
-
-          {/* Panel */}
-          <div className="relative w-full max-w-6xl rounded-[2.5rem] bg-white shadow-2xl border border-zinc-200 overflow-hidden">
-            {/* Header */}
-            <div className="flex items-center justify-between px-5 md:px-8 py-4 border-b border-zinc-100">
-              <div className="font-subtitle tracking-[0.3em] uppercase font-bold text-zinc-400">
-                Terms & Conditions
-              </div>
-              <button
-                type="button"
-                onClick={() => setOpen(false)}
-                className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center
-                           text-zinc-600 hover:text-zinc-900 hover:border-zinc-300 transition-all"
-                aria-label="Close"
-              >
-                <X size={18} />
-              </button>
-            </div>
-
-            {/* Scrollable content */}
-            <div className="max-h-[80vh] overflow-y-auto">
-              <TermsAndConditions />
-            </div>
-          </div>
-        </div>
-      )}
-    </>
-  );
-}
-

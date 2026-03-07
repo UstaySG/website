@@ -3,6 +3,8 @@ import { motion } from "motion/react";
 import { ArrowLeft, Heart, Home, PackageCheck, Sparkles } from "lucide-react";
 import { Link } from "react-router-dom";
 
+import me from "../portfolio/jingyi.jpg";
+
 const storyParagraphs = [
   `Hi, I’m Jingyi — founder of UStay, and someone who knows firsthand what it feels like to turn a foreign place into a home.`,
   `I moved to Singapore eight years ago with a suitcase, a Statistics PhD from NUS, and a quiet determination to build a life here. And I did. But somewhere along the way, I kept running into the same frustrating reality: making a home in Singapore — one that truly feels like you — often costs far more, and involves far more stress, than it should.`,
@@ -131,17 +133,16 @@ const AboutPage = () => {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 mb-20">
-        <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.15 }}
-            transition={{ duration: 0.7 }}
-            className="letter-envelope"
-        >
+      <section className="about-story-section">
+        <motion.div className="letter-envelope">
             <div className="letter-flap" />
+
             <div className="letter-paper">
-            <div className="mb-8">
+            <div className="polaroid-photo">
+                <img src={me} alt="Jingyi" />
+            </div>
+
+            <div className="letter-header">
                 <div className="font-subtitle tracking-[0.32em] uppercase font-bold text-zinc-400 mb-4">
                 Our Story
                 </div>
@@ -154,10 +155,6 @@ const AboutPage = () => {
                 {storyParagraphs.map((paragraph, index) => (
                 <motion.p
                     key={index}
-                    initial={{ opacity: 0, y: 18 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ duration: 0.55, delay: index * 0.04 }}
                     className={`letter-paragraph ${
                     paragraph === "It didn’t sit right with me." ||
                     paragraph === "So I started UStay to close that gap." ||

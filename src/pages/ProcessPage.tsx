@@ -72,7 +72,7 @@ const ProcessPage = () => {
           <div>
             <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-5">Our Process</div>
             <h1 className="font-title font-serif font-bold text-zinc-900 mb-6 leading-tight">
-              From first floor plan to final <i className="font-normal italic">installation</i>
+              From initial floor plan to final <i className="font-normal italic">installation</i>
             </h1>
             <p className="text-ios-secondary-label font-note max-w-2xl leading-relaxed">
               A clear, managed process designed to keep furniture sourcing simple, coordinated, and low-stress from China to Singapore.

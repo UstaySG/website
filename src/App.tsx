@@ -5,11 +5,18 @@ import { MessageCircle, Instagram, Facebook, Mail, Menu, X, Send } from 'lucide-
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import SplashScreen from './components/SplashScreen';
 import PortfolioPage from './pages/PortfolioPage';
+import ProcessPage from './pages/ProcessPage';
+import AboutPage from './pages/AboutPage';
+import FAQPage from './pages/FAQPage';
 // import hero from "./portfolio/hero.png";
 import serenity from "./portfolio/serenity.jfif";
 import urban from "./portfolio/urban.jfif";
 import luxury from "./portfolio/luxury.jpg";
 import character from "./portfolio/character.jpg";
+import factory1 from "./portfolio/factory1.jpg";
+import sofa from "./portfolio/sofa.jpg";
+import ship from "./portfolio/ship.jpg";
+import { image } from 'motion/react-client';
 
 
 const LinkedInIcon = ({ size = 24 }: { size?: number }) => (
@@ -41,11 +48,13 @@ const Navbar = () => {
 
   const navItems = [
     { name: 'WHY US', href: isHome ? '#why' : '/#why' },
+    { name: 'HOW WE WORK', href: isHome ? '#paths' : '/process' },
     { name: 'OUR WORK', href: isHome ? '#gallery' : '/portfolio' },
-    // { name: 'T&C', href: isHome ? '#terms' : '/#terms' },
+    { name: 'ABOUT US', href: '/about' },
+    { name: 'CONTACT US', href: isHome ? '#footer' : '/#footer' },
   ];
 
-  const quoteHref = isHome ? '#paths' : '/#paths';
+  // const quoteHref = isHome ? '#paths' : '/#paths';
 
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-6'}`}>
@@ -68,7 +77,9 @@ const Navbar = () => {
             ))}
 
             <a
-              href={quoteHref}
+              href="https://wa.me/6589904529"
+              target="_blank"
+              rel="noopener noreferrer"
               className="bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:opacity-80 transition-opacity"
             >
               GET A QUOTE
@@ -95,7 +106,9 @@ const Navbar = () => {
           ))}
 
           <a 
-            href={quoteHref}
+            href="https://wa.me/6589904529"
+            target="_blank"
+            rel="noopener noreferrer"
             className="bg-black text-white w-full py-4 rounded-2xl font-medium mt-2 text-center"
           >
             GET A QUOTE
@@ -130,13 +143,13 @@ const Hero = () => (
 
     <div className="relative z-10 text-center px-6 max-w-6xl flex flex-col items-center">
       {/* hero-eyebrow */}
-      <motion.div 
+      {/* <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         className="font-subtitle tracking-[0.4em] uppercase font-bold font-greybrown mb-8"
       >
         Singapore's Furniture Concierge · Condo & BTO Specialists
-      </motion.div>
+      </motion.div> */}
 
       {/* hero-line1 */}
       <motion.h1 
@@ -194,11 +207,13 @@ const Hero = () => (
         transition={{ delay: 0.3 }}
         className="text-ios-secondary-label max-w-2xl mb-12 font-note leading-relaxed text-zinc-600"
       >
-        Factory-direct furniture from trusted manufacturers — with full design guidance, ordering, and delivery handled for you.
+        {/* Factory-direct furniture from trusted manufacturers — with full design guidance, ordering, and delivery handled for you. */}
+        Carefully sourced from trusted factories in Guangdong, China. <br/>
+        Delivered and professionally installed in Singapore.
       </motion.p>
 
       {/* hero-btns */}
-      <motion.div 
+      {/* <motion.div 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
@@ -210,7 +225,7 @@ const Hero = () => (
         <a href="#gallery" className="black-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-content">
           See Our Work
         </a>
-      </motion.div>
+      </motion.div> */}
 
       {/* hero-stats */}
       <motion.div 
@@ -275,23 +290,32 @@ const WhyUs = () => {
       description: "We cut out the middlemen. Premium quality at prices local showrooms can't match.\nSee our past projects →.",
       link: "#gallery",
       color: "bg-[#FDF8F3]",
-      borderColor: "border-[#E5D5C0]"
+      overlay: "bg-[rgba(253,248,243,0.75)]",
+      borderColor: "border-[#E5D5C0]",
+      image: factory1,
+      external: false
     },
     {
       id: "02",
       title: "Curated Quality",
-      description: "Every piece sourced from manufacturers we personally trust. No guesswork, no quality lottery.\nStart a quote →.",
+      description: "Every piece sourced from manufacturers we personally trust. No guesswork, no quality lottery.\nSee our services →.",
       link: "#paths",
       color: "bg-[#F5F5F0]",
-      borderColor: "border-[#D1D1CB]"
+      overlay: "bg-[rgba(245,245,240,0.75)]",
+      borderColor: "border-[#D1D1CB]",
+      image: sofa,
+      external: false
     },
     {
       id: "03",
       title: "Singapore-Side Support",
-      description: "We manage shipping, customs, delivery, and installation end to end.\nChat with us on Telegram →.",
-      link: "https://t.me/ustaysg",
+      description: "We manage shipping, customs, delivery, and installation end to end.\nChat with us on WhatsApp →.",
+      link: "https://wa.me/6589904529",
       color: "bg-[#F0F4F8]",
-      borderColor: "border-[#D1D9E6]"
+      overlay: "bg-[rgba(240,244,248,0.75)]",
+      borderColor: "border-[#D1D9E6]",
+      image: ship,
+      external: true
     }
   ];
 
@@ -308,16 +332,31 @@ const WhyUs = () => {
 
         <div className="grid-1-3">
           {reasons.map((reason, idx) => (
-            <a 
+            <a
               key={idx}
               href={reason.link}
-              className={`p-10 rounded-[2.5rem] border ${reason.borderColor} ${reason.color} flex flex-col h-full transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group`}
+              target={reason.external ? "_blank" : undefined}
+              rel={reason.external ? "noopener noreferrer" : undefined}
+              className={`relative overflow-hidden rounded-[2.5rem] border ${reason.borderColor} flex flex-col h-full transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group`}
             >
-              <div className="font-llabel font-serif font-bold text-zinc-300 mb-10 transition-colors">
-                {reason.id}
+              <div
+                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                style={{ backgroundImage: `url(${reason.image})` }}
+              />
+              <div
+                className={`absolute inset-0 ${reason.overlay}`}
+              />
+              <div className="relative z-10 p-10 flex flex-col h-full">
+                <div className="font-llabel font-serif font-bold text-zinc-400 mb-10 transition-colors">
+                  {reason.id}
+                </div>
+                <h3 className="font-llabel font-bold mb-5 text-zinc-800">
+                  {reason.title}
+                </h3>
+                <p className="text-zinc-600 leading-relaxed font-content whitespace-pre-line">
+                  {reason.description}
+                </p>
               </div>
-              <h3 className="font-llabel font-bold mb-5 text-zinc-800">{reason.title}</h3>
-              <p className="text-zinc-600 leading-relaxed font-content whitespace-pre-line">{reason.description}</p>
             </a>
           ))}
         </div>
@@ -342,11 +381,11 @@ const HowWeWork = () => {
           <div className="p-12 md:p-20 rounded-[3.5rem] bg-white border border-[#E5D5C0] flex flex-col items-center text-center shadow-sm relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-[#E5D5C0] transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
             <div className="font-slabel tracking-[0.4em] uppercase font-bold text-[#C5A059] mb-10">Path One</div>
-            <h3 className="font-llabel font-serif font-bold mb-12 leading-tight text-zinc-800">I know<br />what I want</h3>
-            <ul className="space-y-8 mb-14 text-zinc-500 font-medium font-note">
-              <li>Send photos or floor plan</li>
-              <li>We source & quote</li>
-              <li>Approve — we deliver</li>
+            <h3 className="font-llabel font-serif font-bold mb-12 leading-tight text-zinc-800">You design it yourself</h3>
+            <ul className="space-y-8 mb-14 text-zinc-500 font-medium font-note text-left">
+              <li>You already know the style and pieces you want.</li>
+              <li>We help you confirm the details, source from trusted factories, and handle the rest</li>
+              <li>— from checking and shipment to import, delivery, and installation.</li>
             </ul>
             <a 
               href="https://wa.me/6589904529"
@@ -362,22 +401,20 @@ const HowWeWork = () => {
           <div className="p-12 md:p-20 rounded-[3.5rem] bg-[#1f3a34] text-white flex flex-col items-center text-center shadow-2xl relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-full h-1 bg-white/20 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-700" />
             <div className="font-slabel tracking-[0.4em] uppercase font-bold text-zinc-500 mb-10">Path Two</div>
-            <h3 className="font-llabel md:text-6xl font-serif font-bold mb-12 leading-tight">I need a<br />design first</h3>
-            <ul className="space-y-8 mb-14 text-zinc-400 font-note">
-              <li>Get a full soft-furnishing plan</li>
-              <li>Style direction + item list</li>
-              <li>Buy through us — fee offset</li>
+            <h3 className="font-llabel md:text-6xl font-serif font-bold mb-12 leading-tight">We design it for you</h3>
+            <ul className="space-y-8 mb-14 text-zinc-400 font-note text-left">
+              <li>You share your space, needs, and budget.</li>
+              <li>We help you build the right furniture and styling direction, then handle the same full process</li>
+              <li>— from sourcing and checking to shipment, import, delivery, and installation.</li>
             </ul>
             <div className="flex flex-col items-center gap-5">
               <a 
-                href="https://wa.me/6589904529"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/process"
                 className="bg-white text-black px-14 py-6 rounded-full font-bold flex items-center gap-2 hover:bg-zinc-200 transition-all shadow-xl font-note"
               >
-                Explore Design
+                Explore Process
               </a>
-              <span className="font-slabel font-cream font-bold tracking-[0.2em] uppercase">From S$300</span>
+              {/* <span className="font-slabel font-cream font-bold tracking-[0.2em] uppercase">From S$300</span> */}
             </div>
           </div>
         </div>
@@ -693,47 +730,231 @@ const PrivacyPolicy = () => {
   );
 };
 
+// const TermsAndConditions = () => {
+//   const sections = [
+//     {
+//       title: "Orders & Payment",
+//       items: [
+//         "A deposit is required before production begins. Final balance is due prior to shipment.",
+//         "All prices are quoted in SGD and inclusive of our service fee unless stated otherwise.",
+//         "Lead times vary by item (typically 4–10 weeks). We confirm your timeline before you commit.",
+//         "Orders may not be cancelled once production has commenced."
+//       ],
+//       color: "bg-[#FDF8F3]"
+//     },
+//     {
+//       title: "Delivery & Installation",
+//       items: [
+//         "Delivery is to your Singapore address. Additional charges may apply for high-floor or no-lift access.",
+//         "All items are inspected before handover. Notify us of any damage within 48 hours of delivery.",
+//         "Installation is included for standard furniture. Electrical or carpentry work is not included.",
+//         "We are not responsible for delays caused by port congestion, customs, or force majeure."
+//       ],
+//       color: "bg-[#F5F5F0]"
+//     },
+//     {
+//       title: "Design Service",
+//       items: [
+//         "The S$300 design fee covers one full soft-furnishing plan. Additional revisions are chargeable.",
+//         "The fee is offset against your order total when you purchase through UStay within 90 days.",
+//         "Design plans are for personal use only and may not be shared with other vendors.",
+//         "UStay retains the right to use project photos for portfolio purposes unless you opt out."
+//       ],
+//       color: "bg-[#F0F4F8]"
+//     },
+//     {
+//       title: "Quality & Disputes",
+//       items: [
+//         "We cannot guarantee exact colour matches to screen references due to monitor variance.",
+//         "Minor variations in grain, texture, or shade are inherent to natural and handcrafted materials.",
+//         "Any dispute should be raised in writing within 7 days of delivery for prompt investigation.",
+//         "Our liability is limited to the value of the affected item(s) only."
+//       ],
+//       color: "bg-[#FAF9F6]"
+//     }
+//   ];
+
+//   return (
+//     <section id="terms" className="py-24 bg-white border-t border-zinc-100">
+//       <div className="max-w-7xl mx-auto px-6">
+//         <div className="mb-16 text-center">
+//           <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Terms & Conditions</div>
+//           <h2 className="font-title font-serif font-bold text-zinc-900">
+//             Our <i className="font-normal italic">commitment</i> to you
+//           </h2>
+//         </div>
+
+//         <div className="grid-1-2">
+//           {sections.map((section, idx) => (
+//             <motion.div
+//               key={idx}
+//               initial={{ opacity: 0, y: 20 }}
+//               whileInView={{ opacity: 1, y: 0 }}
+//               viewport={{ once: true }}
+//               className={`min-w-0 p-8 md:p-14 rounded-[3rem] border border-zinc-100 ${section.color} shadow-sm`}
+//             >
+//               <h3 className="font-note mb-8 tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-200/50 pb-4">
+//                 {section.title}
+//               </h3>
+
+//               <ul className="space-y-5">
+//                 {section.items.map((item, iIdx) => (
+//                   <li key={iIdx} className="flex items-start gap-3 text-zinc-600 leading-relaxed font-content">
+//                     <span className="mt-2 w-1.5 h-1.5 rounded-full bg-black shrink-0" />
+//                     <span>{item}</span>
+//                   </li>
+//                 ))}
+//               </ul>
+//             </motion.div>
+//           ))}
+//         </div>
+
+//         <div className="mt-20 p-12 md:p-16 bg-darkcyan rounded-[4rem] text-zinc-100 text-sm leading-relaxed shadow-2xl border border-white/5 relative overflow-hidden">
+//           <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mb-32 blur-2xl" />
+//           <div className="relative z-10">
+//             <p className="mb-4 font-content font-serif leading-relaxed">
+//               By engaging UStay's services — through Telegram, this website, or any other channel — you agree to these terms. Terms are subject to change; the most current version is always reflected on this page.
+//             </p>
+//             <p className="mb-4 font-note font-serif leading-relaxed">
+//               For any questions, please reach out via <a href="https://wa.me/6589904529" className="text-zinc-300 font-bold underline transition-colors">WhatsApp</a> before placing an order. We are always happy to clarify.
+//             </p>
+//           </div>
+//         </div>
+//       </div>
+//     </section>
+//   );
+// };
+
 const TermsAndConditions = () => {
   const sections = [
     {
-      title: "Orders & Payment",
+      title: "1. Scope of Service",
       items: [
-        "A deposit is required before production begins. Final balance is due prior to shipment.",
-        "All prices are quoted in SGD and inclusive of our service fee unless stated otherwise.",
-        "Lead times vary by item (typically 4–10 weeks). We confirm your timeline before you commit.",
-        "Orders may not be cancelled once production has commenced."
+        "UStay provides furniture and soft-furnishing sourcing, coordination, and related support services for clients in Singapore.",
+        "Our service may include consultation, furniture selection, design guidance, sourcing, specification confirmation, production follow-up, shipment coordination, import handling, delivery, installation, and after-sales coordination, depending on the agreed scope of work.",
+        "UStay is not a traditional retail furniture store with ready-stock inventory. Most items are custom-made or specially sourced based on each client’s confirmed selections."
       ],
       color: "bg-[#FDF8F3]"
     },
     {
-      title: "Delivery & Installation",
+      title: "2. Orders, Confirmation & Custom-Made Items",
       items: [
-        "Delivery is to your Singapore address. Additional charges may apply for high-floor or no-lift access.",
-        "All items are inspected before handover. Notify us of any damage within 48 hours of delivery.",
-        "Installation is included for standard furniture. Electrical or carpentry work is not included.",
-        "We are not responsible for delays caused by port congestion, customs, or force majeure."
+        "All orders are based on the client’s confirmed selections, including dimensions, materials, colours, finishes, configurations, quantities, and any custom details.",
+        "Because most items are custom-made or specially sourced, all confirmed orders are final, non-returnable, and generally non-cancellable.",
+        "Clients are responsible for carefully reviewing and approving all specifications before order confirmation.",
+        "Once an order has been confirmed and the required deposit has been paid, sourcing, procurement, or production may begin immediately."
       ],
       color: "bg-[#F5F5F0]"
     },
     {
-      title: "Design Service",
+      title: "3. Payment Terms",
       items: [
-        "The S$300 design fee covers one full soft-furnishing plan. Additional revisions are chargeable.",
-        "The fee is offset against your order total when you purchase through UStay within 90 days.",
-        "Design plans are for personal use only and may not be shared with other vendors.",
-        "UStay retains the right to use project photos for portfolio purposes unless you opt out."
+        "For orders above SGD 600, a 60% deposit is required upon order confirmation unless otherwise agreed in writing.",
+        "The remaining balance is payable when the furniture arrives, prior to final handover, delivery completion, or installation, unless otherwise stated by UStay in writing.",
+        "All prices are quoted in SGD unless otherwise stated.",
+        "Where applicable, quoted prices include UStay’s service fee. Additional charges may apply for approved changes, special access conditions, non-standard installation requirements, or other extra services outside the original scope."
       ],
       color: "bg-[#F0F4F8]"
     },
     {
-      title: "Quality & Disputes",
+      title: "4. Cancellations, Changes & Refunds",
       items: [
-        "We cannot guarantee exact colour matches to screen references due to monitor variance.",
-        "Minor variations in grain, texture, or shade are inherent to natural and handcrafted materials.",
-        "Any dispute should be raised in writing within 7 days of delivery for prompt investigation.",
-        "Our liability is limited to the value of the affected item(s) only."
+        "Once the required deposit has been paid, the order cannot be cancelled.",
+        "As sourcing and production begin after confirmation, changes may not be possible once the deposit has been received.",
+        "Any request to amend an order is subject to whether procurement, sourcing, or production has already started. If changes are still possible, additional costs and revised lead times may apply.",
+        "Deposits paid for confirmed orders are non-refundable except where UStay expressly agrees otherwise in writing."
       ],
       color: "bg-[#FAF9F6]"
+    },
+    {
+      title: "5. Lead Times, Shipping & Delays",
+      items: [
+        "Lead times vary depending on product type, supplier availability, customisation requirements, production schedules, shipping arrangements, customs clearance, and other logistics factors.",
+        "Estimated timelines are provided in good faith but are not guaranteed unless expressly confirmed in writing.",
+        "Delays arising from production, shipment, customs, port congestion, logistics disruptions, force majeure, or other circumstances beyond UStay’s reasonable control do not constitute product defects and are not grounds for cancellation, refund, or return.",
+        "UStay will make reasonable efforts to keep clients informed of material timeline changes."
+      ],
+      color: "bg-[#FDF8F3]"
+    },
+    {
+      title: "6. Delivery, Installation & On-Site Inspection",
+      items: [
+        "UStay arranges delivery and installation in Singapore as part of the agreed service scope.",
+        "Additional charges may apply for restricted access, stair carry, high-floor delivery, no-lift access, re-delivery, waiting time, or other non-standard site conditions.",
+        "Upon delivery, the items will be inspected on-site together with the client, where reasonably possible, to confirm their condition at the time of handover.",
+        "The client is responsible for ensuring that the site is accessible, ready for delivery, and suitable for installation."
+      ],
+      color: "bg-[#F5F5F0]"
+    },
+    {
+      title: "7. Damage in Transit & Delivery Issues",
+      items: [
+        "All furniture shipments are fully insured during transit.",
+        "If any item is found to be damaged upon arrival or during on-site inspection, UStay will review the issue and take responsibility for coordinating an appropriate solution based on the nature of the damage.",
+        "UStay reserves the right to determine the most appropriate remedy, which may include repair, replacement, replacement parts, touch-up, or another reasonable solution depending on the case.",
+        "Damage caused after delivery by misuse, improper handling, accidental damage, poor maintenance, third-party moving, third-party installation, modification, or disassembly is not covered."
+      ],
+      color: "bg-[#F0F4F8]"
+    },
+    {
+      title: "8. Warranty Coverage",
+      items: [
+        "All furniture items come with a 1-year warranty from the date of delivery and on-site acceptance.",
+        "The warranty covers manufacturing defects, structural defects, and workmanship defects under normal residential use.",
+        "Warranty coverage applies only where the product has been used properly, maintained reasonably, and not subjected to misuse, abuse, or unauthorised modification.",
+        "Any accepted warranty claim will be resolved in the manner UStay considers most appropriate, including repair, replacement, replacement parts, or another reasonable remedy."
+      ],
+      color: "bg-[#FAF9F6]"
+    },
+    {
+      title: "9. Warranty Exclusions",
+      items: [
+        "The warranty does not cover decoration items, styling accessories, or non-structural décor pieces unless expressly stated otherwise.",
+        "The warranty does not cover normal wear and tear, including minor softening, settling, fading, or age-related changes arising from normal use.",
+        "The warranty does not cover scratches, dents, stains, chips, tears, or other damage occurring after delivery.",
+        "The warranty does not cover misuse, accidental damage, improper cleaning, improper handling, improper care, or unsuitable environmental conditions.",
+        "The warranty does not cover damage caused by third-party moving, third-party installation, modification, repair, or disassembly.",
+        "The warranty does not cover any specifications, dimensions, materials, colours, finishes, or configurations that were approved by the client before production.",
+        "The warranty does not cover delays caused by production, shipping, customs, or logistics processes."
+      ],
+      color: "bg-[#FDF8F3]"
+    },
+    {
+      title: "10. Natural Materials & Acceptable Variations",
+      items: [
+        "Many of our products involve natural, handmade, or semi-handmade materials and finishes.",
+        "Minor variations in colour, tone, texture, wood grain, marble veining, fabric appearance, stitching, finish, pattern, or other natural characteristics are normal and are not regarded as defects.",
+        "Screen-based references, photographs, and samples may not perfectly match the final product due to lighting, monitor settings, material batch differences, and handcrafted variation.",
+        "Such natural or visual variations do not entitle the client to cancellation, refund, replacement, or return."
+      ],
+      color: "bg-[#F5F5F0]"
+    },
+    {
+      title: "11. Design Services & Intellectual Property",
+      items: [
+        "Where a design or furnishing service is provided, the applicable design fee and scope will be communicated before commencement.",
+        "Unless otherwise agreed, design concepts, layout suggestions, sourcing proposals, moodboards, and related materials prepared by UStay are for the client’s personal project use only.",
+        "These materials may not be copied, resold, distributed, or shared with third-party vendors for commercial use without UStay’s prior written consent.",
+        "UStay reserves the right to use non-confidential project images for portfolio, website, or marketing purposes unless the client requests otherwise in writing."
+      ],
+      color: "bg-[#F0F4F8]"
+    },
+    {
+      title: "12. Liability & Dispute Handling",
+      items: [
+        "UStay’s liability for any claim relating to an affected item or service shall be limited, to the fullest extent permitted by law, to the value of the affected item or the relevant service fee actually paid.",
+        "UStay shall not be liable for indirect, incidental, consequential, or special losses, including loss of use, delay-related inconvenience, or third-party costs not expressly agreed by UStay.",
+        "Any concern or dispute should be raised promptly in writing together with relevant details, photographs, or supporting evidence so that it can be reviewed fairly and efficiently.",
+        "UStay will assess each case in good faith and seek a commercially reasonable resolution where appropriate."
+      ],
+      color: "bg-[#FAF9F6]"
+    },
+    {
+      title: "13. Singapore Only",
+      items: [
+        "These terms, including the return and warranty policy, apply only to furniture and related services delivered within Singapore unless otherwise agreed in writing."
+      ],
+      color: "bg-[#FDF8F3]"
     }
   ];
 
@@ -741,10 +962,15 @@ const TermsAndConditions = () => {
     <section id="terms" className="py-24 bg-white border-t border-zinc-100">
       <div className="max-w-7xl mx-auto px-6">
         <div className="mb-16 text-center">
-          <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">Terms & Conditions</div>
+          <div className="font-subtitle tracking-[0.4em] uppercase font-bold text-zinc-400 mb-4">
+            Terms of Service
+          </div>
           <h2 className="font-title font-serif font-bold text-zinc-900">
-            Our <i className="font-normal italic">commitment</i> to you
+            Clear terms for a more <i className="font-normal italic">confident</i> process
           </h2>
+          <p className="mt-6 max-w-3xl mx-auto text-zinc-600 leading-relaxed font-content">
+            We believe cross-border furnishing should feel transparent and well-managed. These terms explain how orders, payments, delivery, warranty, and support are handled when you work with UStay.
+          </p>
         </div>
 
         <div className="grid-1-2">
@@ -756,7 +982,7 @@ const TermsAndConditions = () => {
               viewport={{ once: true }}
               className={`min-w-0 p-8 md:p-14 rounded-[3rem] border border-zinc-100 ${section.color} shadow-sm`}
             >
-              <h3 className="font-note mb-8 tracking-[0.2em] uppercase text-zinc-400 border-b border-zinc-200/50 pb-4">
+              <h3 className="font-note mb-8 tracking-[0.12em] uppercase text-zinc-500 border-b border-zinc-200/50 pb-4">
                 {section.title}
               </h3>
 
@@ -776,10 +1002,20 @@ const TermsAndConditions = () => {
           <div className="absolute bottom-0 right-0 w-64 h-64 bg-white/5 rounded-full -mr-32 -mb-32 blur-2xl" />
           <div className="relative z-10">
             <p className="mb-4 font-content font-serif leading-relaxed">
-              By engaging UStay's services — through Telegram, this website, or any other channel — you agree to these terms. Terms are subject to change; the most current version is always reflected on this page.
+              By engaging UStay’s services through this website, WhatsApp, Telegram, email, or any other communication channel, you acknowledge and agree to these terms.
             </p>
-            <p className="mb-4 font-note font-serif leading-relaxed">
-              For any questions, please reach out via <a href="https://wa.me/6589904529" className="text-zinc-300 font-bold underline transition-colors">WhatsApp</a> before placing an order. We are always happy to clarify.
+            <p className="mb-4 font-content font-serif leading-relaxed">
+              These terms may be updated from time to time. The most current version published by UStay will apply unless otherwise agreed in writing.
+            </p>
+            <p className="font-note font-serif leading-relaxed">
+              If you have any questions before confirming an order, please contact us via{" "}
+              <a
+                href="https://wa.me/6589904529"
+                className="text-zinc-300 font-bold underline transition-colors"
+              >
+                WhatsApp
+              </a>
+              . We are always happy to clarify.
             </p>
           </div>
         </div>
@@ -800,64 +1036,118 @@ const ChatButton = () => (
   </a>
 );
 
+const socialMedia = [
+  {
+    href: "https://t.me/ustaysg",
+    icon: Send,
+    label: "Telegram",
+    external: true,
+  },
+  {
+    href: "mailto:clientservice@ustaysingapore.com",
+    icon: Mail,
+    label: "Email",
+    external: false,
+  },
+  {
+    href: "https://www.facebook.com/profile.php?id=61552263188169",
+    icon: Facebook,
+    label: "Facebook",
+    external: true,
+  },
+  {
+    href: "https://www.instagram.com/ustaysg/",
+    icon: Instagram,
+    label: "Instagram",
+    external: true,
+  },
+  {
+    href: "https://x.com/UstaySG",
+    icon: X,
+    label: "X",
+    external: true,
+  },
+  {
+    href: "https://www.linkedin.com/in/ustay-singapore-0a42a53b4/",
+    icon: LinkedInIcon,
+    label: "LinkedIn",
+    external: true,
+  },
+];
+
 const Footer = () => (
-  <footer className="bg-black pt-4 pb-12 border-t border-zinc-100">
-    {/* <div className="max-w-7xl mx-auto px-6"> */}
-      {/* <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-        <div className="md:col-span-2">
-          <div className="flex items-center gap-2 mb-6">
-            <span className="font-serif font-bold text-2xl tracking-tight text-zinc-900">UStay</span>
+  <footer id="footer" className="bg-black pt-8 pb-6 border-t border-zinc-800">
+    <div className="max-w-7xl mx-auto px-6">
+      <div className="grid grid-1-3 gap-12 mb-4">
+        <div>
+          <div className="flex items-center gap-2 mb-4">
+            <span className="font-serif font-bold font-llabel tracking-tight font-cream">
+              UStay
+            </span>
           </div>
-          <p className="text-zinc-500 max-w-sm mb-8 leading-relaxed">
-            Singapore's Furniture Concierge. Condo & BTO Specialists. Transforming houses into homes with bespoke soft furnishing solutions.
+          <p className="font-slabel text-zinc-400 mb-4 leading-relaxed">
+            Singapore’s furniture concierge for condo and BTO homes, offering
+            sourcing, coordination, delivery, and installation with a refined,
+            hassle-free experience.
           </p>
-          <div className="flex gap-4">
-            <a href="https://t.me/ustaysg" className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-black hover:text-white transition-all">
-              <Instagram className="w-5 h-5" />
-            </a>
-            <a href="mailto:hello@ustay.sg" className="w-10 h-10 rounded-full border border-zinc-200 flex items-center justify-center hover:bg-black hover:text-white transition-all">
-              <Mail className="w-5 h-5" />
-            </a>
-          </div>
         </div>
-        
-        <div>
-          <h4 className="font-bold mb-6 text-zinc-900 uppercase tracking-widest text-xs">Explore</h4>
-          <ul className="space-y-4 text-zinc-500">
-            <li><a href="#why" className="hover:text-black transition-colors">Why Us</a></li>
-            <li><a href="#gallery" className="hover:text-black transition-colors">Our Work</a></li>
-            <li><a href="#terms" className="hover:text-black transition-colors">T&C</a></li>
-          </ul>
-        </div>
-        
-        <div>
-          <h4 className="font-bold mb-6 text-zinc-900 uppercase tracking-widest text-xs">Contact</h4>
-          <ul className="space-y-4 text-zinc-500">
-            <li>Singapore</li>
-            <li><a href="https://t.me/ustaysg" className="hover:text-black transition-colors">Telegram: @ustaysg</a></li>
-            <li><a href="mailto:hello@ustay.sg" className="hover:text-black transition-colors">hello@ustay.sg</a></li>
-          </ul>
-        </div>
-      </div> */}
-      
-      <div className="pt-4 flex flex-col items-center text-center gap-4 text-zinc-400">
-        <ul id="media" className="flex flex-wrap justify-center gap-8">
-          <li><a href="https://t.me/ustaysg" target="_blank" rel="noopener noreferrer"><Send size={24} /></a></li>
-          <li><a href="mailto:clientservice@ustaysingapore.com"><Mail size={24} /></a></li>
-          <li><a href="https://www.facebook.com/profile.php?id=61552263188169" target="_blank" rel="noopener noreferrer"><Facebook size={24} /></a></li>
-          <li><a href="https://www.instagram.com/ustaysg/" target="_blank" rel="noopener noreferrer"><Instagram size={24} /></a></li>
-          <li><a href="https://x.com/UstaySG" target="_blank" rel="noopener noreferrer"><X size={24} /></a></li>
-          <li><a href="https://www.linkedin.com/in/ustay-singapore-0a42a53b4/" target="_blank" rel="noopener noreferrer"><LinkedInIcon /></a></li>
-        </ul>
 
-        <p className="font-cream font-subtitle">© 2026 UStay. All rights reserved.</p>
+        <div>
+          <h4 className="font-bold mb-4 font-cream uppercase tracking-widest font-subtitle">
+            Company
+          </h4>
+          <ul className="mb-4 font-content">
+            <li>
+              <a href="/about" className="text-zinc-400-300 transition-colors">
+                About Us
+              </a>
+            </li>
+            <li>
+              <a href="/faq" className="text-zinc-400-300 transition-colors">
+                FAQ
+              </a>
+            </li>
+            <li className="text-zinc-400-300 transition-colors flex gap-2">
+              Contact Us
+                {socialMedia.map(({ href, icon: Icon, label, external }) => (
+                  <a
+                    key={label}
+                    href={href}
+                    target={external ? "_blank" : undefined}
+                    rel={external ? "noopener noreferrer" : undefined}
+                    aria-label={label}
+                    className="w-7 h-7 rounded-full border border-zinc-700 text-zinc-400-300 flex items-center justify-center"
+                  >
+                    <Icon className="w-5 h-5" />
+                  </a>
+                ))}
+            </li>
+          </ul>
+          
+        </div>
 
-        <div className="flex flex-wrap justify-center gap-8 font-cream font-subtitle">
-          <PrivacyModalTrigger />
-          <TermsModalTrigger />
+        <div>
+          <h4 className="font-bold mb-4 font-cream uppercase tracking-widest font-subtitle">
+            Legal
+          </h4>
+          <ul className="space-y-4 text-zinc-300">
+            <li>
+              <PrivacyModalTrigger />
+            </li>
+            <li>
+              <TermsModalTrigger />
+            </li>
+            <li className="text-zinc-400">Singapore</li>
+          </ul>
+          
+         
         </div>
       </div>
-    {/* </div> */}
+
+      <div className="pt-1 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4 text-zinc-400 font-slabel">
+        <p>© 2026 UStay. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
 );
 
@@ -870,7 +1160,7 @@ const LandingPage = () => {
       <HowWeWork />
       <OurWork />
       {/* <TermsAndConditions /> */}
-      <ChatButton />
+      {/* <ChatButton /> */}
     </div>
   );
 };
@@ -904,7 +1194,6 @@ const ScrollToHashElement = () => {
       }
     };
 
-    // 等页面内容先渲染出来
     setTimeout(scrollToElement, 100);
   }, [location]);
 
@@ -931,13 +1220,17 @@ export default function App() {
 
       <ScrollToTop />
       <ScrollToHashElement />
-      
+
       <div className="min-h-screen">
         <Navbar />
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
+          <Route path="/process" element={<ProcessPage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/faq" element={<FAQPage />} />
         </Routes>
+        <ChatButton />
         <Footer />
       </div>
     </Router>
@@ -968,7 +1261,7 @@ export function PrivacyModalTrigger() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="text-zinc-300 transition-colors"
+        className="text-zinc-400-300 transition-colors font-content"
       >
         Privacy Policy
       </button>
@@ -1029,7 +1322,7 @@ export function TermsModalTrigger() {
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="text-zinc-300 transition-colors"
+        className="text-zinc-400-300 transition-colors font-content"
       >
         Terms of Service
       </button>

@@ -70,7 +70,7 @@ const PortfolioPage = () => {
 
         {/* Sticky Sub-nav */}
         <div className="sticky top-24 z-40 mb-10 py-1 -mx-6 px-2 glass border-y border-black/5">
-          <div className="flex flex-wrap gap-0 justify-center">
+          <div className="flex flex-wrap gap-0-12-60 justify-center">
             {styles.map((style) => (
               <a 
                 key={style.name} 

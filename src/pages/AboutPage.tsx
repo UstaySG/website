@@ -214,7 +214,7 @@ const AboutPage = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.65 }}
-          className="rounded-[3rem] border border-[#d8c0a3] bg-gradient-charcoal from-[#2f2a26] via-[#3b342f] to-[#4a4038] px-8 py-10 md:px-12 md:py-14 text-white shadow-2xl"
+          className="rounded-[3rem] border border-[#d8c0a3] bg-gradient-charcoal px-8 py-10 md:px-12 md:py-14 text-white shadow-2xl"
         >
           <div className="max-w-7xl">
             <div className="font-subtitle tracking-[0.34em] uppercase font-bold text-white-45 mb-4">
@@ -240,10 +240,10 @@ const AboutPage = () => {
                 Start a Quote
               </a>
               <Link
-                to="/portfolio"
+                to="/factory"
                 className="inline-flex items-center justify-center rounded-full border border-white/20 px-7 py-4 font-note font-bold text-white transition-all hover:bg-white/10"
               >
-                View Our Work
+                View Our Product
               </Link>
             </div>
           </div>

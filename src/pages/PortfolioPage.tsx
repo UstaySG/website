@@ -65,7 +65,19 @@ const PortfolioPage = () => {
         
         <div className="mb-10">
           <h1 className="font-title font-serif font-bold mb-6">Selected Works</h1>
-          <p className="text-ios-secondary-label font-note`  max-w-7xl">Explore our portfolio of curated spaces, categorized by the unique styles that define our design philosophy.</p>
+          <p className="text-ios-secondary-label font-note max-w-7xl">Explore our portfolio of curated spaces, categorized by the unique styles that define our design philosophy.</p>
+          <p className="mt-4 text-zinc-600 font-content max-w-7xl leading-relaxed">
+            The portfolio shown here highlights mainly <span className="italic">living and dining</span> areas for presentation. 
+            For full-home details, more room views, or further project information, please feel free to &nbsp;
+            <a 
+              href="https://wa.me/6589904529"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-black-40 text-white rounded-full font-bold italic gap-2 hover:bg-black transition-all shadow-lg px-5 py-2"
+            >
+              message us directly.
+            </a>
+          </p>
         </div>
 
         {/* Sticky Sub-nav */}

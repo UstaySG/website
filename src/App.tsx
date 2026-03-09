@@ -36,91 +36,6 @@ const LinkedInIcon = ({ size = 24 }: { size?: number }) => (
   </svg>
 );
 
-// const Navbar = () => {
-//   const [isScrolled, setIsScrolled] = React.useState(false);
-//   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-//   const location = useLocation();
-//   const isHome = location.pathname === '/';
-
-//   React.useEffect(() => {
-//     const handleScroll = () => setIsScrolled(window.scrollY > 20);
-//     window.addEventListener('scroll', handleScroll);
-//     return () => window.removeEventListener('scroll', handleScroll);
-//   }, []);
-
-//   const navItems = [
-//     { name: 'WHY US', href: isHome ? '#why' : '/#why' },
-//     { name: 'HOW WE WORK', href: isHome ? '#paths' : '/process' },
-//     { name: 'OUR WORK', href: isHome ? '#gallery' : '/portfolio' },
-//     { name: 'ABOUT US', href: '/about' },
-//     { name: 'CONTACT US', href: isHome ? '#footer' : '/#footer' },
-//   ];
-
-//   // const quoteHref = isHome ? '#paths' : '/#paths';
-
-//   return (
-//     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled ? 'py-3' : 'py-6'}`}>
-//       <div className="max-w-7xl mx-auto px-6">
-//         <div className={`glass rounded-full px-6 py-3 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'ios-shadow' : ''}`}>
-//           <Link to="/" className="flex items-center gap-2">
-//             <span className="font-serif font-bold text-xl tracking-tight">UStay</span>
-//           </Link>
-
-//           {/* Desktop */}
-//           <div className="hidden md:flex items-center gap-8">
-//             {navItems.map((item) => (
-//               <a
-//                 key={item.name}
-//                 href={item.href}
-//                 className="text-sm font-medium text-ios-secondary-label hover:text-black transition-colors"
-//               >
-//                 {item.name}
-//               </a>
-//             ))}
-
-//             <a
-//               href="https://wa.me/6589904529"
-//               target="_blank"
-//               rel="noopener noreferrer"
-//               className="bg-black text-white px-5 py-2 rounded-full text-sm font-medium hover:opacity-80 transition-opacity"
-//             >
-//               GET A QUOTE
-//             </a>
-//           </div>
-
-//           <button className="md:hidden" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-//             {isMobileMenuOpen ? <X /> : <Menu />}
-//           </button>
-//         </div>
-//       </div>
-
-//       {/* Mobile Menu */}
-//       {isMobileMenuOpen && (
-//         <motion.div 
-//           initial={{ opacity: 0, y: -20 }}
-//           animate={{ opacity: 1, y: 0 }}
-//           className="absolute top-full left-6 right-6 mt-2 glass rounded-3xl p-6 flex flex-col gap-4 md:hidden"
-//         >
-//           {navItems.map((item) => (
-//             <a key={item.name} href={item.href} className="text-lg font-medium py-2" onClick={() => setIsMobileMenuOpen(false)}>
-//               {item.name}
-//             </a>
-//           ))}
-
-//           <a 
-//             href="https://wa.me/6589904529"
-//             target="_blank"
-//             rel="noopener noreferrer"
-//             className="bg-black text-white w-full py-4 rounded-2xl font-medium mt-2 text-center"
-//           >
-//             GET A QUOTE
-//           </a>
-//         </motion.div>
-//       )}
-//     </nav>
-//   );
-// };
-
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
@@ -173,7 +88,7 @@ const Navbar = () => {
               item.children ? (
                 <div
                   key={item.name}
-                  className="relative"
+                  className="relative py-2"
                   onMouseEnter={() => setIsWhyOpen(true)}
                   onMouseLeave={() => setIsWhyOpen(false)}
                 >
@@ -185,17 +100,19 @@ const Navbar = () => {
                   </a>
 
                   {isWhyOpen && (
-                    <div className="absolute top-full left-1/2 -translate-x-1/2 mt-4 w-56 rounded-3xl border border-[#eadfce] bg-white/95 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-3">
-                      <div className="flex flex-col">
-                        {item.children.map((child) => (
-                          <a
-                            key={child.name}
-                            href={child.href}
-                            className="rounded-2xl px-4 py-3 text-sm font-medium text-zinc-700 hover:bg-[#f8f3ec] hover:text-black transition-all"
-                          >
-                            {child.name}
-                          </a>
-                        ))}
+                    <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2 w-56">
+                      <div className="rounded-3xl border border-[#eadfce] bg-white/95 backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.08)] p-3">
+                        <div className="flex flex-col">
+                          {item.children.map((child) => (
+                            <a
+                              key={child.name}
+                              href={child.href}
+                              className="rounded-2xl px-4 py-3 text-sm font-medium text-zinc-700 hover:bg-[#f8f3ec] hover:text-black transition-all"
+                            >
+                              {child.name}
+                            </a>
+                          ))}
+                        </div>
                       </div>
                     </div>
                   )}

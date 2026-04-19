@@ -706,7 +706,7 @@ const OurWork = () => {
           {/* Right */}
           <div className="w-1/3 flex flex-col items-start gap-8">
             <div className="font-title font-serif font-bold text-[#F5C400]">
-              S$300
+              S$1/Sqft
             </div>
 
             <div className="font-slabel uppercase tracking-[0.2em] text-white">

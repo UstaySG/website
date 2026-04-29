@@ -160,7 +160,7 @@ const BrochurePage = () => {
                     href={item.file}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 rounded-full bg-[#2f2a26] px-5 py-3 text-white font-note font-bold transition-all hover:scale-[1.02]"
+                    className="inline-flex items-center gap-2 rounded-full bg-[#2f2a26] px-5 py-3 !text-white font-note font-bold transition-all hover:scale-[1.02]"
                     >
                     View PDF
                     <ExternalLink className="w-4 h-4" />

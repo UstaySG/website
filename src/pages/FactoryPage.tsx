@@ -361,7 +361,7 @@ const FactoryPage = () => {
                 href="https://wa.me/6589904529"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 font-note font-bold text-black transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 font-note font-bold !text-black transition-all hover:scale-[1.02]"
               >
                 Start a Quote <ArrowRight className="w-4 h-4" />
               </a>

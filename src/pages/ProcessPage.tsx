@@ -196,7 +196,7 @@ const ProcessPage = () => {
                 Get a Quote <ArrowRight className="h-4 w-4" />
               </a>
               <Link
-                to="/portfolio"
+                to="/lookbook"
                 className="inline-flex items-center gap-2 rounded-full border border-white/20 px-7 py-4 font-note font-bold text-white transition-all hover:bg-white/10"
               >
                 View Our Work

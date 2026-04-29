@@ -369,7 +369,7 @@ const Footer = () => {
           </div>
           <div>
             <h5>Contact</h5>
-            <ul>
+            <div className="flex">
               {socialMedia.map(({ href, icon: Icon, label, external }) => (
                   <a
                     key={label}
@@ -382,7 +382,7 @@ const Footer = () => {
                     <Icon className="w-5 h-5" />
                   </a>
                 ))}
-            </ul>
+            </div>
           </div>
           <div>
             <h5>Legal</h5>

@@ -195,6 +195,86 @@ const Navbar = () => {
   );
 };
 
+type FurnitureEntrance = {
+  direction: "left" | "right" | "top" | "bottom" | "back";
+  delay: number;
+};
+
+const furnitureEntrance = {
+  hidden: ({ direction }: FurnitureEntrance) => ({
+    opacity: 0,
+    x: direction === "left" ? -260 : direction === "right" ? 260 : 0,
+    y: direction === "top" ? -180 : direction === "bottom" ? 180 : direction === "back" ? -42 : 0,
+    scale: direction === "back" ? 0.72 : 0.86,
+    rotate: direction === "left" ? -8 : direction === "right" ? 8 : 0,
+  }),
+  visible: ({ delay }: FurnitureEntrance) => ({
+    opacity: 1,
+    x: 0,
+    y: 0,
+    scale: 1,
+    rotate: 0,
+    transition: {
+      delay,
+      duration: 1,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  }),
+};
+
+const HeroFurnitureScene = () => (
+  <motion.div
+    initial={{ opacity: 0, y: 28 }}
+    animate={{ opacity: 1, y: 0 }}
+    transition={{ delay: 0.15, duration: 0.8, ease: "easeOut" }}
+    className="hero-room-stage mt-4 mb-10"
+    aria-label="Animated room scene with furniture walking into place"
+  >
+    <div className="hero-room-shell">
+      <div className="hero-window" />
+      <div className="hero-arch" />
+      <motion.div
+        custom={{ direction: "top", delay: 0.2 }}
+        variants={furnitureEntrance}
+        initial="hidden"
+        animate="visible"
+        className="hero-chandelier"
+      >
+        <span />
+      </motion.div>
+      <motion.div
+        custom={{ direction: "back", delay: 0.38 }}
+        variants={furnitureEntrance}
+        initial="hidden"
+        animate="visible"
+        className="hero-mirror"
+      />
+      <motion.div custom={{ direction: "left", delay: 0.55 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-tree hero-tree-left" />
+      <motion.div custom={{ direction: "right", delay: 0.65 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-tree hero-tree-right" />
+      <motion.div custom={{ direction: "bottom", delay: 0.3 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-rug" />
+      <motion.div custom={{ direction: "back", delay: 0.38 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-console">
+        <div className="hero-console-art hero-console-art-one" />
+        <div className="hero-console-art hero-console-art-two" />
+        <div className="hero-console-art hero-console-art-three" />
+        <div className="hero-console-art hero-console-art-four" />
+      </motion.div>
+      <motion.div custom={{ direction: "left", delay: 0.55 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-chair hero-chair-left">
+        <span />
+      </motion.div>
+      <motion.div custom={{ direction: "right", delay: 0.65 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-chair hero-chair-right">
+        <span />
+      </motion.div>
+      <motion.div custom={{ direction: "bottom", delay: 0.3 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-coffee-table">
+        <span />
+      </motion.div>
+      <motion.div custom={{ direction: "left", delay: 0.55 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-side-table hero-side-table-left" />
+      <motion.div custom={{ direction: "right", delay: 0.65 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-side-table hero-side-table-right" />
+      <motion.div custom={{ direction: "right", delay: 0.65 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-floor-lamp" />
+      <motion.div custom={{ direction: "right", delay: 0.65 }} variants={furnitureEntrance} initial="hidden" animate="visible" className="hero-wall-art" />
+    </div>
+  </motion.div>
+);
+
 const Hero = () => (
   <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden pt-32 pb-20 hero">
     {/* Background Image */}
@@ -218,96 +298,43 @@ const Hero = () => (
     </div>
 
     <div className="relative z-10 text-center px-6 max-w-6xl flex flex-col items-center">
-      {/* hero-eyebrow */}
-      {/* <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="font-subtitle tracking-[0.4em] uppercase font-bold font-greybrown mb-8"
-      >
-        Singapore's Furniture Concierge · Condo & BTO Specialists
-      </motion.div> */}
-
       {/* hero-line1 */}
       <motion.h1 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.1 }}
-        className="font-title font-serif font-bold mb-12 font-warmblack"
+        className="font-title font-serif font-bold mb-3 font-warmblack"
       >
         Furnish your home
       </motion.h1>
 
-      {/* BIG BALANCE SCALE */}
-      <motion.div 
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2, duration: 0.8 }}
-        className="relative w-full max-w-2xl mb-16 flex flex-col items-center animate-seesaw origin-center"
+      <motion.p
+        initial={{ opacity: 0, y: 16 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.18 }}
+        className="font-subtitle uppercase tracking-[0.28em] text-zinc-500 mb-3"
       >
-        {/* Beam */}
-        <div className="relative w-full h-1 bg-gradient-to-r from-transparent via-darkblue to-transparent mb-2">
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-zinc-800 rounded-full z-20" />
-        </div>
-        
-        <div className="flex justify-between w-full px-0 md:px-12">
-          {/* Left Pan */}
-          <div className="flex flex-col items-center">
-            <div className="w-px h-16 bg-zinc-800" />
-            <div className="px-6 py-3 rounded-full bg-darkblue-50">
-              <span className="font-xllabel font-serif italic">beautifully</span>
-            </div>
-          </div>
+        Watch every piece walk into place
+      </motion.p>
 
-          {/* Right Pan */}
-          <div className="flex flex-col items-center">
-            <div className="w-px h-16 bg-zinc-800" />
-            <div className="px-6 py-3 rounded-full bg-yellow-50">
-              <span className="font-xllabel font-serif italic">affordably</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Scale Post */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-24 bg-black -z-10" />
-        
-        {/* Scale And */}
-        <div className="mt-8 font-note tracking-[0.3em] uppercase font-bold font-darkbrown">
-          equally important
-        </div>
-      </motion.div>
+      <HeroFurnitureScene />
 
       {/* hero-sub */}
       <motion.p 
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.3 }}
+        transition={{ delay: 0.45 }}
         className="text-ios-secondary-label max-w-2xl mb-12 font-note leading-relaxed text-zinc-600"
       >
-        {/* Factory-direct furniture from trusted manufacturers — with full design guidance, ordering, and delivery handled for you. */}
         Carefully sourced from trusted factories in Guangdong, China. <br/>
         Delivered and professionally installed in Singapore.
       </motion.p>
-
-      {/* hero-btns */}
-      {/* <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4 }}
-        className="flex flex-row gap-24 mb-20 justify-center"
-      >
-        <a href="#paths" className="white-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-content">
-          Start Your Journey
-        </a>
-        <a href="#gallery" className="black-button px-8 md:px-10 py-4 rounded-full font-bold transition-all font-content">
-          See Our Work
-        </a>
-      </motion.div> */}
 
       {/* hero-stats */}
       <motion.div 
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ delay: 0.6 }}
+        transition={{ delay: 0.7 }}
         className="flex flex-wrap justify-center gap-8-96 border-t border-white/5 pt-12 w-full"
       >
         <div className="flex flex-col items-center gap-1">

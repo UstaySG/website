@@ -101,7 +101,7 @@ const ProcessPage = () => {
               <div className="font-subtitle uppercase tracking-[0.35em] font-bold text-[#c5a059] mb-4">What you can expect</div>
               <div className="space-y-5">
                 <div className="rounded-[2rem] bg-pinkcream p-5">
-                  <div className="font-note font-bold text-zinc-600 mb-1">Two ways to start</div>
+                  <div className="font-note font-bold text-zinc-600 mb-1">Three ways to start</div>
                   <p className="font-content text-zinc-500 leading-relaxed">Come with your own furniture direction, or let us help shape it with you.</p>
                 </div>
                 <div className="rounded-[2rem] bg-greyblue-50 p-5">
@@ -191,7 +191,7 @@ const ProcessPage = () => {
                 href="https://wa.me/6589904529"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 font-note font-bold text-black transition-all hover:scale-[1.02]"
+                className="inline-flex items-center gap-2 rounded-full bg-white px-7 py-4 font-note font-bold !text-black transition-all hover:scale-[1.02]"
               >
                 Get a Quote <ArrowRight className="h-4 w-4" />
               </a>

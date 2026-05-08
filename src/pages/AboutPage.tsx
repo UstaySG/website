@@ -235,7 +235,7 @@ const AboutPage = () => {
                 href="https://wa.me/6589904529"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 font-note font-bold text-black transition-all hover:scale-[1.02]"
+                className="inline-flex items-center justify-center rounded-full bg-white px-7 py-4 font-note font-bold !text-black transition-all hover:scale-[1.02]"
               >
                 Start a Quote
               </a>

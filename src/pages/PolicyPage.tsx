@@ -255,7 +255,7 @@ const PolicyModal = ({
           >
             <button
               onClick={onClose}
-              className="sticky top-4 ml-auto mr-4 mt-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[#e8dccb] bg-white text-zinc-700 shadow-sm hover:bg-zinc-50 transition"
+              className="sticky top-4 ml-auto mr-4 mt-4 z-10 flex h-10 w-10 items-center justify-center rounded-full border border-[#e8dccb] bg-white text-zinc-800 shadow-sm hover:bg-zinc-50 transition"
               aria-label="Close modal"
             >
               <X className="w-4 h-4" />
@@ -323,7 +323,7 @@ const FooterPolicyBlock = () => {
         <li>
             <button
             onClick={() => setOpenPolicy("privacy")}
-            className="text-zinc-400-300">
+            className="text-zinc-400-300 left-align">
             Privacy Policy
             </button>
         </li>
@@ -331,7 +331,7 @@ const FooterPolicyBlock = () => {
         <li>
             <button
             onClick={() => setOpenPolicy("terms")}
-            className="text-zinc-400-300">
+            className="text-zinc-400-300 left-align">
             Terms of Service
             </button>
         </li>
@@ -339,7 +339,7 @@ const FooterPolicyBlock = () => {
         <li>
             <button
             onClick={() => setOpenPolicy("delivery")}
-            className="text-zinc-400-300">
+            className="text-zinc-400-300 left-align">
             Delivery, Shipping & Inspection
             </button>
         </li>
@@ -347,7 +347,7 @@ const FooterPolicyBlock = () => {
         <li>
             <button
             onClick={() => setOpenPolicy("warranty")}
-            className="text-zinc-400-300">
+            className="text-zinc-400-300 left-align">
             Returns & Warranty
             </button>
         </li>

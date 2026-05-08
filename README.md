@@ -23,3 +23,4 @@ View your app in AI Studio: https://ai.studio/apps/c9e0d85f-b084-4b9d-b9b8-4482a
 
 1. V0: inital version, focus on furnishing
 2. V1: more about interior styling
+2. V2: animation in hero

@@ -16,8 +16,6 @@ import serenity from "./portfolio/serenity.jfif";
 import urban from "./portfolio/urban.jfif";
 import luxury from "./portfolio/luxury.jpg";
 import character from "./portfolio/character.jpg";
-import factory1 from "./factory/factory1.jpg";
-import sofa from "./factory/sofa.jpg";
 import ship from "./factory/ship.jpg";
 
 
@@ -368,7 +366,8 @@ const WhyUs = () => {
       color: "bg-[#FDF8F3]",
       overlay: "bg-[rgba(253,248,243,0.75)]",
       borderColor: "border-[#E5D5C0]",
-      image: factory1,
+      visual: "geometry",
+      pattern: "factory",
       external: false
     },
     {
@@ -379,7 +378,8 @@ const WhyUs = () => {
       color: "bg-[#F5F5F0]",
       overlay: "bg-[rgba(245,245,240,0.75)]",
       borderColor: "border-[#D1D1CB]",
-      image: sofa,
+      visual: "geometry",
+      pattern: "quality",
       external: false
     },
     {
@@ -390,6 +390,7 @@ const WhyUs = () => {
       color: "bg-[#F0F4F8]",
       overlay: "bg-[rgba(240,244,248,0.75)]",
       borderColor: "border-[#D1D9E6]",
+      visual: "image",
       image: ship,
       external: true
     }
@@ -415,13 +416,38 @@ const WhyUs = () => {
               rel={reason.external ? "noopener noreferrer" : undefined}
               className={`relative overflow-hidden rounded-[2.5rem] border ${reason.borderColor} flex flex-col h-full transition-all duration-500 hover:shadow-xl hover:-translate-y-2 group`}
             >
-              <div
-                className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
-                style={{ backgroundImage: `url(${reason.image})` }}
-              />
-              <div
-                className={`absolute inset-0 ${reason.overlay}`}
-              />
+              {reason.visual === "image" ? (
+                <>
+                  <div
+                    className="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-105"
+                    style={{ backgroundImage: `url(${reason.image})` }}
+                  />
+                  <div
+                    className={`absolute inset-0 ${reason.overlay}`}
+                  />
+                </>
+              ) : (
+                <div className={`absolute inset-0 ${reason.color} overflow-hidden`}>
+                  {reason.pattern === "factory" ? (
+                    <>
+                      <div className="absolute -top-20 -right-16 h-56 w-56 rounded-full bg-[#E5D5C0]/70 transition-transform duration-700 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 h-36 w-full bg-[#1f3a34]/10 [clip-path:polygon(0_42%,100%_0,100%_100%,0_100%)]" />
+                      <div className="absolute left-10 top-20 grid grid-cols-4 gap-3 opacity-35">
+                        {Array.from({ length: 16 }).map((_, dotIndex) => (
+                          <span key={dotIndex} className="h-3 w-3 rounded-full bg-[#C5A059]" />
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="absolute -left-20 top-10 h-64 w-64 rotate-45 rounded-[3rem] bg-[#D1D1CB]/60 transition-transform duration-700 group-hover:rotate-[52deg]" />
+                      <div className="absolute right-8 top-8 h-28 w-28 rounded-full border-[18px] border-[#C5A059]/30" />
+                      <div className="absolute bottom-10 right-12 h-32 w-44 rounded-[2rem] bg-white/45 shadow-inner" />
+                      <div className="absolute bottom-0 left-0 h-24 w-full bg-[#1f3a34]/10 [clip-path:polygon(0_0,100%_46%,100%_100%,0_100%)]" />
+                    </>
+                  )}
+                </div>
+              )}
               <div className="relative z-10 p-10 flex flex-col h-full">
                 <div className="font-llabel font-serif font-bold text-zinc-400 mb-10 transition-colors">
                   {reason.id}

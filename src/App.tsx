@@ -1,9 +1,8 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 import { ArrowLeft, ArrowRight, ClipboardList, Heart, Home, Sparkles, Palette, Ruler, Factory, PackageCheck, SearchCheck, ShipWheel, Sofa, MessageCircle, Instagram, Facebook, Mail, Menu, X, Send  } from 'lucide-react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
-import SplashScreen from './components/SplashScreen.tsx';
 import FactoryPage from './pages/FactoryPage.tsx'
 import BrochurePage from './pages/BrochurePage.tsx'
 import PortfolioPage from './pages/PortfolioPage.tsx';
@@ -19,6 +18,13 @@ import character from "./portfolio/character.jpg";
 import factory1 from "./factory/factory1.jpg";
 import sofa from "./factory/sofa.jpg";
 import ship from "./factory/ship.jpg";
+
+import spacingSofa from "./portfolio/wcream/pic1.jpg";
+import spacingDining from "./portfolio/fcream/pic2.jpg";
+import spacingStorage from "./portfolio/mtra/pic3.jpg";
+import premiumLiving from "./portfolio/italian/pic1.jpg";
+import premiumLounge from "./portfolio/ll/pic2.jpg";
+import premiumBedroom from "./portfolio/italian2/pic3.jpg";
 
 
 const LinkedInIcon = ({ size = 24 }: { size?: number }) => (
@@ -729,6 +735,242 @@ const OurWork = () => {
   );
 };
 
+
+type CollectionKey = "spacing" | "premium";
+
+type Collection = {
+  key: CollectionKey;
+  name: string;
+  eyebrow: string;
+  intro: string;
+  description: string;
+  heroImage: string;
+  accent: string;
+  textOnDark: boolean;
+  highlights: string[];
+  slides: {
+    title: string;
+    caption: string;
+    image: string;
+  }[];
+};
+
+const collections: Record<CollectionKey, Collection> = {
+  spacing: {
+    key: "spacing",
+    name: "UStay Spacing",
+    eyebrow: "Small-space efficiency",
+    intro: "Make every square metre work beautifully.",
+    description:
+      "Compact condo and BTO homes need furniture that stores more, moves smarter, and keeps daily life visually light.",
+    heroImage: urban,
+    accent: "#D7E5D8",
+    textOnDark: false,
+    highlights: ["Hidden storage", "Slim profiles", "Multi-use layouts"],
+    slides: [
+      {
+        title: "Lift-up storage seating",
+        caption: "Sofas and benches that open up space for linens, toys, and everyday clutter.",
+        image: spacingSofa,
+      },
+      {
+        title: "Expandable dining moments",
+        caption: "Dining pieces sized for weekday calm and weekend hosting without crowding the room.",
+        image: spacingDining,
+      },
+      {
+        title: "Wall-friendly storage",
+        caption: "Consoles, shelves, and custom casegoods planned around circulation and visual breathing room.",
+        image: spacingStorage,
+      },
+    ],
+  },
+  premium: {
+    key: "premium",
+    name: "UStay Premium",
+    eyebrow: "Luxury design feeling",
+    intro: "Layered, polished, and quietly impressive.",
+    description:
+      "For homes that should feel elevated from the first glance: richer materials, stronger silhouettes, and curated statement details.",
+    heroImage: luxury,
+    accent: "#E8D2A6",
+    textOnDark: true,
+    highlights: ["Statement materials", "Hotel-inspired comfort", "Tailored finishes"],
+    slides: [
+      {
+        title: "Sculptural living sets",
+        caption: "Sofas, lounge chairs, and consoles with premium proportions and a designer presence.",
+        image: premiumLiving,
+      },
+      {
+        title: "Layered lounge details",
+        caption: "Accent pieces, tables, and textures selected to create a collected luxury atmosphere.",
+        image: premiumLounge,
+      },
+      {
+        title: "Boutique bedroom suites",
+        caption: "Beds, nightstands, and soft details that bring hotel-level comfort into daily life.",
+        image: premiumBedroom,
+      },
+    ],
+  },
+};
+
+const CollectionGateway = ({ onSelect }: { onSelect: (key: CollectionKey) => void }) => (
+  <section className="min-h-screen pt-28 bg-[#f8f3ec]">
+    <div className="grid min-h-[calc(100vh-7rem)] grid-cols-1 md:grid-cols-2">
+      {(Object.keys(collections) as CollectionKey[]).map((key) => {
+        const collection = collections[key];
+        return (
+          <button
+            key={collection.key}
+            type="button"
+            onClick={() => onSelect(collection.key)}
+            className="group relative min-h-[50vh] overflow-hidden text-left md:min-h-[calc(100vh-7rem)]"
+          >
+            <img
+              src={collection.heroImage}
+              alt={`${collection.name} interior`}
+              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-black/10" />
+            <div className="relative z-10 flex h-full flex-col justify-end p-8 md:p-14 lg:p-20">
+              <div className="mb-5 inline-flex w-fit rounded-full border border-white/35 bg-white/15 px-4 py-2 text-xs font-bold uppercase tracking-[0.3em] text-white backdrop-blur">
+                {collection.eyebrow}
+              </div>
+              <h1 className="font-serif text-5xl font-bold leading-none text-white md:text-6xl lg:text-7xl">
+                {collection.name}
+              </h1>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/85 md:text-2xl">
+                {collection.description}
+              </p>
+              <span className="mt-8 inline-flex w-fit items-center rounded-full bg-white px-6 py-3 text-sm font-bold uppercase tracking-widest text-black transition-transform group-hover:translate-x-2">
+                Explore {collection.key === "spacing" ? "Spacing" : "Premium"} →
+              </span>
+            </div>
+          </button>
+        );
+      })}
+    </div>
+  </section>
+);
+
+const CollectionTabs = ({ active, onChange }: { active: CollectionKey; onChange: (key: CollectionKey) => void }) => (
+  <div className="mx-auto flex w-fit rounded-full border border-white/30 bg-white/70 p-1 shadow-xl backdrop-blur-xl">
+    {(Object.keys(collections) as CollectionKey[]).map((key) => (
+      <button
+        key={key}
+        type="button"
+        onClick={() => onChange(key)}
+        className={`rounded-full px-5 py-3 text-xs font-bold uppercase tracking-[0.24em] transition-all md:px-8 ${
+          active === key ? "bg-black text-white shadow-lg" : "text-zinc-600 hover:text-black"
+        }`}
+      >
+        {collections[key].name.replace("UStay ", "")}
+      </button>
+    ))}
+  </div>
+);
+
+const CollectionHero = ({ collection, active, onChange }: { collection: Collection; active: CollectionKey; onChange: (key: CollectionKey) => void }) => (
+  <section className="relative min-h-screen overflow-hidden pt-32">
+    <img
+      src={collection.heroImage}
+      alt={`${collection.name} hero interior`}
+      className="absolute inset-0 h-full w-full object-cover"
+    />
+    <div className={`absolute inset-0 ${collection.textOnDark ? "bg-black/55" : "bg-white/55"}`} />
+    <div className="relative z-10 mx-auto flex min-h-[calc(100vh-8rem)] max-w-7xl flex-col justify-center px-6 py-16 text-center">
+      <CollectionTabs active={active} onChange={onChange} />
+      <motion.div
+        key={collection.key}
+        initial={{ opacity: 0, y: 24 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        className="mx-auto mt-14 max-w-5xl"
+      >
+        <div
+          className={`mb-6 text-sm font-bold uppercase tracking-[0.45em] ${
+            collection.textOnDark ? "text-white/70" : "text-zinc-600"
+          }`}
+        >
+          {collection.eyebrow}
+        </div>
+        <h1 className={`font-serif text-5xl font-bold leading-tight md:text-7xl ${collection.textOnDark ? "text-white" : "text-zinc-950"}`}>
+          {collection.intro}
+        </h1>
+        <p className={`mx-auto mt-8 max-w-3xl text-xl leading-relaxed md:text-2xl ${collection.textOnDark ? "text-white/80" : "text-zinc-700"}`}>
+          {collection.description}
+        </p>
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          {collection.highlights.map((highlight) => (
+            <span
+              key={highlight}
+              className={`rounded-full px-5 py-3 text-sm font-semibold ${
+                collection.textOnDark ? "bg-white/15 text-white backdrop-blur" : "bg-white/80 text-zinc-800 shadow-sm"
+              }`}
+              style={{ border: `1px solid ${collection.accent}` }}
+            >
+              {highlight}
+            </span>
+          ))}
+        </div>
+      </motion.div>
+    </div>
+  </section>
+);
+
+const FurnitureSlides = ({ collection }: { collection: Collection }) => (
+  <section id="slides" className="bg-[#fbf7f0] py-24">
+    <div className="mx-auto max-w-7xl px-6">
+      <div className="mb-12 flex flex-col justify-between gap-6 md:flex-row md:items-end">
+        <div>
+          <div className="mb-4 text-sm font-bold uppercase tracking-[0.4em] text-zinc-400">Furniture slides</div>
+          <h2 className="font-serif text-4xl font-bold text-zinc-950 md:text-6xl">
+            Pieces for <i className="font-normal">{collection.name.replace("UStay ", "")}</i>
+          </h2>
+        </div>
+        <p className="max-w-md text-lg leading-relaxed text-zinc-600">
+          Swipe horizontally to preview furniture directions we can source, customise, and coordinate for this home style.
+        </p>
+      </div>
+
+      <div className="no-scrollbar flex snap-x gap-6 overflow-x-auto pb-6">
+        {collection.slides.map((slide, index) => (
+          <article
+            key={slide.title}
+            className="group relative min-w-[82vw] snap-center overflow-hidden rounded-[2.5rem] bg-black shadow-2xl md:min-w-[46%] lg:min-w-[34%]"
+          >
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="h-[520px] w-full object-cover opacity-90 transition-transform duration-700 group-hover:scale-105"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent" />
+            <div className="absolute inset-x-0 bottom-0 p-8 text-white">
+              <div className="mb-4 text-sm font-bold uppercase tracking-[0.35em] text-white/55">0{index + 1}</div>
+              <h3 className="font-serif text-3xl font-bold">{slide.title}</h3>
+              <p className="mt-4 text-base leading-relaxed text-white/75">{slide.caption}</p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+);
+
+const CollectionExperience = ({ selected, onSelect }: { selected: CollectionKey; onSelect: (key: CollectionKey) => void }) => {
+  const collection = collections[selected];
+
+  return (
+    <>
+      <CollectionHero collection={collection} active={selected} onChange={onSelect} />
+      <FurnitureSlides collection={collection} />
+      <WhyUs />
+    </>
+  );
+};
+
 const ChatButton = () => (
   <a 
     href="https://wa.me/6589904529"
@@ -851,15 +1093,15 @@ const Footer = () => (
 );
 
 const LandingPage = () => {
+  const [selectedCollection, setSelectedCollection] = React.useState<CollectionKey | null>(null);
+
   return (
     <div className="min-h-screen">
-      <Hero />
-      <Marquee />
-      <WhyUs />
-      <HowWeWork />
-      <OurWork />
-      {/* <TermsAndConditions /> */}
-      {/* <ChatButton /> */}
+      {selectedCollection ? (
+        <CollectionExperience selected={selectedCollection} onSelect={setSelectedCollection} />
+      ) : (
+        <CollectionGateway onSelect={setSelectedCollection} />
+      )}
     </div>
   );
 };
@@ -900,23 +1142,8 @@ const ScrollToHashElement = () => {
 };
 
 export default function App() {
-  const [showSplash, setShowSplash] = React.useState(() => {
-    return sessionStorage.getItem('ustay-splash-shown') !== 'true';
-  });
-
-  const handleSplashComplete = () => {
-    sessionStorage.setItem('ustay-splash-shown', 'true');
-    setShowSplash(false);
-  };
-
   return (
     <Router>
-      <AnimatePresence mode="wait">
-        {showSplash && (
-          <SplashScreen onComplete={handleSplashComplete} />
-        )}
-      </AnimatePresence>
-
       <ScrollToTop />
       <ScrollToHashElement />
 
@@ -936,6 +1163,4 @@ export default function App() {
       </div>
     </Router>
   );
-
-  
 }
